@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="STM32实现DSP功能开发环境：Windows10 21H2 + CLion + STM32CubeMX 开发平台：ART-Pi(STM32H750XBH6) 前言前段时间入手了RT-THread家的ART-Pi当开发板用，想要做一个PPG采集装置，经过研究发现需要实现一个FIR带通滤波器，正好H7集成了硬件DSP单元，于是折腾了一下。 实验内容1.滤波器设计使用MATLAB R2018b，命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7[1.3]DSP%E5%8A%9F%E8%83%BD/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="STM32实现DSP功能开发环境：Windows10 21H2 + CLion + STM32CubeMX 开发平台：ART-Pi(STM32H750XBH6) 前言前段时间入手了RT-THread家的ART-Pi当开发板用，想要做一个PPG采集装置，经过研究发现需要实现一个FIR带通滤波器，正好H7集成了硬件DSP单元，于是折腾了一下。 实验内容1.滤波器设计使用MATLAB R2018b，命令">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/pic/image-20220113220306327.png">
+<meta property="og:image" content="http://example.com/pic/image-20220113223041505.png">
+<meta property="og:image" content="http://example.com/pic/image-20220113222730139.png">
+<meta property="og:image" content="http://example.com/pic/image-20220113222831632.png">
+<meta property="article:published_time" content="2022-10-21T01:37:26.514Z">
+<meta property="article:modified_time" content="2022-08-10T03:44:11.494Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/pic/image-20220113220306327.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-STM32开发·[1.3]DSP功能" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.3%5DDSP%E5%8A%9F%E8%83%BD/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.514Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="STM32实现DSP功能"><a href="#STM32实现DSP功能" class="headerlink" title="STM32实现DSP功能"></a>STM32实现DSP功能</h1><p>开发环境：Windows10 21H2 + CLion + STM32CubeMX</p>
+<p>开发平台：ART-Pi(STM32H750XBH6)</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前段时间入手了RT-THread家的ART-Pi当开发板用，想要做一个PPG采集装置，经过研究发现需要实现一个FIR带通滤波器，正好H7集成了硬件DSP单元，于是折腾了一下。</p>
+<h2 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h2><h3 id="1-滤波器设计"><a href="#1-滤波器设计" class="headerlink" title="1.滤波器设计"></a>1.滤波器设计</h3><p>使用MATLAB R2018b，命令行输入<code>filterDesigner</code>打开滤波器设计工具</p>
+<p><img src="/pic/image-20220113220306327.png" alt="image-20220113220306327"></p>
+<p>选择<strong>使用窗函数的FIR带通滤波器</strong>，阶数设置为<strong>28</strong>， 选用<strong>汉明窗</strong>，设置采样频率为<strong>1000Hz</strong>，通带截止频率为<strong>125Hz与300Hz</strong></p>
+<p>点击Design Filter后点击Target -&gt; Generate C Header，选择Single-precision float，点击Generate</p>
+<h3 id="2-配置STM32开发环境"><a href="#2-配置STM32开发环境" class="headerlink" title="2.配置STM32开发环境"></a>2.配置STM32开发环境</h3><p>访问<a target="_blank" rel="noopener" href="https://github.com/arm-software/CMSIS_5%E4%B8%8B%E8%BD%BDCMSIS%EF%BC%8C%E6%88%96%E4%BD%BF%E7%94%A8STM32CubeMX%E7%94%9F%E6%88%90%E5%85%A8%E9%83%A8%E6%96%87%E4%BB%B6%E8%8E%B7%E5%BE%97CMSIS%E8%BD%AF%E4%BB%B6%E5%8C%85">https://github.com/arm-software/CMSIS_5下载CMSIS，或使用STM32CubeMX生成全部文件获得CMSIS软件包</a></p>
+<p>在项目根目录下创建Lib文件夹，复制libarm_cortexM7lfdp_math.a至文件夹中</p>
+<p>创建Core&#x2F;User&#x2F;DSP文件夹，复制arm_common_tables.h、arm_const_structs.h、arm_math.h三个文件至目录中</p>
+<p><img src="/pic/image-20220113223041505.png" alt="image-20220113223041505"></p>
+<p>在CMakeLists中，添加：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include_directories</span>(Core/User/DSP)</span><br><span class="line"><span class="keyword">link_directories</span>(Lib)</span><br><span class="line"><span class="keyword">link_libraries</span>(libarm_cortexM7lfdp_math.a)</span><br></pre></td></tr></table></figure>
+
+<p>在用户代码中添加<code>#include &quot;arm_math.h&quot;</code>头文件</p>
+<h3 id="3-使用STM32生成信号并滤波"><a href="#3-使用STM32生成信号并滤波" class="headerlink" title="3.使用STM32生成信号并滤波"></a>3.使用STM32生成信号并滤波</h3><p>定义如下常量：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> TEST_LENGTH_SAMPLES 1024 <span class="comment">//采样点数</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BLOCK_SIZE 1 <span class="comment">//每次处理点数</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NUM_TAPS 29 <span class="comment">//滤波器系数个数</span></span></span><br></pre></td></tr></table></figure>
+
+<p>声明变量：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">uint32_t</span> blockSize = BLOCK_SIZE;</span><br><span class="line"><span class="type">uint32_t</span> numBlocks = TEST_LENGTH_SAMPLES / BLOCK_SIZE;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">float32_t</span> testInput_f32[TEST_LENGTH_SAMPLES];</span><br><span class="line"><span class="type">static</span> <span class="type">float32_t</span> testOutput[TEST_LENGTH_SAMPLES];</span><br><span class="line"><span class="type">static</span> <span class="type">float32_t</span> firStateF32[BLOCK_SIZE + NUM_TAPS - <span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+
+<p>将MATLAB生成的滤波器系数导入：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">float32_t</span> firCoeffs32BP[NUM_TAPS] = &#123;</span><br><span class="line">        <span class="number">0.003531039227f</span>,    <span class="number">0.0002660876198f</span>,   <span class="number">-0.001947779674f</span>,  <span class="number">0.001266813371f</span>,  <span class="number">-0.008019094355f</span>,</span><br><span class="line">        <span class="number">-0.01986379735f</span>,    <span class="number">0.01018396299f</span>,     <span class="number">0.03163734451f</span>,    <span class="number">0.00165955862f</span>,   <span class="number">0.03312643617f</span>,</span><br><span class="line">        <span class="number">0.0622616075f</span>,      <span class="number">-0.1229852438f</span>,     <span class="number">-0.2399847955f</span>,    <span class="number">0.07637182623f</span>,   <span class="number">0.3482480049f</span>,</span><br><span class="line">        <span class="number">0.07637182623f</span>,     <span class="number">-0.2399847955f</span>,     <span class="number">-0.1229852438f</span>,    <span class="number">0.0622616075f</span>,    <span class="number">0.03312643617f</span>,</span><br><span class="line">        <span class="number">0.00165955862f</span>,     <span class="number">0.03163734451f</span>,     <span class="number">0.01018396299f</span>,    <span class="number">-0.01986379735f</span>,  <span class="number">-0.008019094355f</span>,</span><br><span class="line">        <span class="number">0.001266813371f</span>,   <span class="number">-0.001947779674f</span>,    <span class="number">0.0002660876198f</span>,  <span class="number">0.003531039227f</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>创建计算函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">arm_fir_f32_bp</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">uint32_t</span> i;</span><br><span class="line">    arm_fir_instance_f32 S;</span><br><span class="line">    <span class="type">float32_t</span> *inputF32, *outputF32;</span><br><span class="line"></span><br><span class="line">    inputF32 = &amp;testInput_f32[<span class="number">0</span>];</span><br><span class="line">    outputF32 = &amp;testOutput[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    arm_fir_init_f32(&amp;S, NUM_TAPS, (<span class="type">float32_t</span> *) &amp;firCoeffs32BP[<span class="number">0</span>], &amp;firStateF32[<span class="number">0</span>], blockSize);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numBlocks; i++) &#123;</span><br><span class="line">        arm_fir_f32(&amp;S, inputF32 + (i * blockSize), outputF32 + (i * blockSize), blockSize);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; TEST_LENGTH_SAMPLES; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%f, %f\r\n&quot;</span>, testOutput[i], inputF32[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生成待滤波信号：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">uint16_t</span> i;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; TEST_LENGTH_SAMPLES; i++) &#123;</span><br><span class="line">    <span class="comment">/* 50Hz正弦波+200Hz正弦波，采样率1KHz */</span></span><br><span class="line">    testInput_f32[i] = arm_sin_f32(<span class="number">2</span> * <span class="number">3.1415926f</span> * <span class="number">50</span> * i / <span class="number">1000</span>) + arm_sin_f32(<span class="number">2</span> * <span class="number">3.1415926f</span> * <span class="number">200</span> * i / <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行<code>arm_fir_f32_bp()</code>即可在串口得到滤波前后数据，将串口助手打印出的数据复制到fir.txt中</p>
+<p><img src="/pic/image-20220113222730139.png" alt="image-20220113222730139"></p>
+<h3 id="4-验证滤波效果"><a href="#4-验证滤波效果" class="headerlink" title="4.验证滤波效果"></a>4.验证滤波效果</h3><p>使用MATLAB进行验证，代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">fs = <span class="number">1000</span>;</span><br><span class="line">N = <span class="number">1024</span>;</span><br><span class="line">n = <span class="number">0</span>:N<span class="number">-1</span>;</span><br><span class="line">t = n/fs;</span><br><span class="line">f = n*fs/N;</span><br><span class="line"></span><br><span class="line">x = <span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>*t)+<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">200</span>*t);</span><br><span class="line">b = fir1(<span class="number">28</span>, [<span class="number">125</span>*<span class="number">2</span>/<span class="number">1000</span> <span class="number">300</span>*<span class="number">2</span>/<span class="number">1000</span>]);</span><br><span class="line">y = filter(b,<span class="number">1</span>,x);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line"><span class="built_in">plot</span>(t,x);</span><br><span class="line">axis([<span class="number">0</span>,<span class="number">0.2</span>,<span class="number">-2</span>,<span class="number">2</span>]);</span><br><span class="line">title(<span class="string">&#x27;原始数据&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;时间&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;幅值&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(t,y);</span><br><span class="line">axis([<span class="number">0</span>,<span class="number">0.2</span>,<span class="number">-2</span>,<span class="number">2</span>]);</span><br><span class="line">title(<span class="string">&#x27;MATLAB滤波数据&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;时间&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;幅值&#x27;</span>);</span><br><span class="line">grid on;</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">3</span>);</span><br><span class="line">d = importdata(<span class="string">&#x27;fir.txt&#x27;</span>);</span><br><span class="line"><span class="built_in">plot</span>(t,d);</span><br><span class="line">axis([<span class="number">0</span>,<span class="number">0.2</span>,<span class="number">-2</span>,<span class="number">2</span>]);</span><br><span class="line">title(<span class="string">&#x27;STM32滤波数据&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;时间&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;幅值&#x27;</span>);</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
+
+<p>验证结果如下：</p>
+<p><img src="/pic/image-20220113222831632.png" alt="image-20220113222831632"></p>
+<p>可以看出，滤波数据与MATLAB近似，效果明显。</p>
+<p><strong>关联文档：</strong><br>上一篇：[[STM32开发·[1.2]笔记]]<br>下一篇：无</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7[1.3]DSP%E5%8A%9F%E8%83%BD/" data-id="cl9htoe78000h44wq6pu7447n" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.2%5D%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/10/21/WordPress%C2%B7%5B1%5D%E5%9C%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E4%B8%8A%E9%83%A8%E7%BD%B2WordPress%20I/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.1%5DLinux%E4%B8%8B%E9%83%A8%E7%BD%B2%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.2%5D%E7%AC%94%E8%AE%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.3%5DDSP%E5%8A%9F%E8%83%BD/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/WordPress%C2%B7%5B1%5D%E5%9C%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E4%B8%8A%E9%83%A8%E7%BD%B2WordPress%20I/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/WordPress%C2%B7%5B3%5D%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E9%83%A8%E7%BD%B2WordPress/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

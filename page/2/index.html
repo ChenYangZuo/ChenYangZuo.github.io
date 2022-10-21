@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-FPGA开发笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/FPGA%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.499Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="FPGA开发笔记"><a href="#FPGA开发笔记" class="headerlink" title="FPGA开发笔记"></a>FPGA开发笔记</h1><p>使用环境：Windows10 Quartus Prime 17.1 Lite</p>
+<h2 id="Testbench仿真"><a href="#Testbench仿真" class="headerlink" title="Testbench仿真"></a>Testbench仿真</h2><p>1.打开编译功能网表后编译工程</p>
+<p>2.新建verilog文件，编写Testbench文件，注意module名与文件名相同。可使用Quartus生成的Testbench模板</p>
+<p>3.配置工程仿真选项，选择仿真程序为modelsim-altera，新建Tesebench项目，确保项目名与文件名相同，设置例化器件为U1</p>
+<p>4.重新编译工程，打开Modelsim，系统自动导入信号并仿真生成图表</p>
+<h2 id="一些不成熟的想法"><a href="#一些不成熟的想法" class="headerlink" title="一些不成熟的想法"></a>一些不成熟的想法</h2><h3 id="2021-4-30"><a href="#2021-4-30" class="headerlink" title="2021.4.30"></a>2021.4.30</h3><p>在学习编写浮点运算单元时，为了方便测试模块功能，选择了编写Testbench，这样打开modelsim的时候就不用手动导入波形，然后再加激励加时钟信号等等。但是这样做的话，每当Testbench中的数据发生变化，就必须重新编译工程，耗费时间。因此考虑可以编写modelsim的.do文件，将导入波形与赋予激励全部用命令记录下来，同时还可以在导入波形时指定显示的进制，这样只需打开modelsim后导入do文件即可开始仿真，省去了编译的时间；同时还可以考虑制作Python脚本，运行Python脚本后可以自动生成用于测试的随机数写入.do文件，并给出正确运算结果，可以极大节省时间。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>1.不同always内不可对同一reg赋值</p>
+<p>2.注意区分&lt;&#x3D;与&#x3D;的区别</p>
+<p>3.例化ROM IP核所用的mif文件要放在工程根目录下，或在例化IP核时输入绝对地址</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/FPGA%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" data-id="cl9htoe71000644wqf2j31bjt" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ESP32开发·[1.1]Linux下部署ESP-IDF开发环境" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/ESP32%E5%BC%80%E5%8F%91%C2%B7%5B1.1%5DLinux%E4%B8%8B%E9%83%A8%E7%BD%B2ESP-IDF%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.499Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="ESP32开发笔记（一）Linux下部署ESP-IDF开发环境"><a href="#ESP32开发笔记（一）Linux下部署ESP-IDF开发环境" class="headerlink" title="ESP32开发笔记（一）Linux下部署ESP-IDF开发环境"></a>ESP32开发笔记（一）Linux下部署ESP-IDF开发环境</h1><p>修改时间：2021.01.30 21:14</p>
+<p>使用环境：Deepin 20.1</p>
+<h2 id="安装依赖环境"><a href="#安装依赖环境" class="headerlink" title="安装依赖环境"></a>安装依赖环境</h2><h3 id="安装依赖文件"><a href="#安装依赖文件" class="headerlink" title="安装依赖文件"></a>安装依赖文件</h3><p><code>sudo apt-get install git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0</code></p>
+<h2 id="获取ESP-IDF"><a href="#获取ESP-IDF" class="headerlink" title="获取ESP-IDF"></a>获取ESP-IDF</h2><h3 id="使用Git获取"><a href="#使用Git获取" class="headerlink" title="使用Git获取"></a>使用Git获取</h3><p><code>mkdir -p ~/esp</code><br><code>cd ~/esp</code><br><code>git clone --recursive https://github.com/espressif/esp-idf.git</code></p>
+<h3 id="直接下载"><a href="#直接下载" class="headerlink" title="直接下载"></a>直接下载</h3><p>前往乐鑫官网下载页面下载压缩包，解压至<code>~/esp</code>目录</p>
+<h2 id="安装前设置"><a href="#安装前设置" class="headerlink" title="安装前设置"></a>安装前设置</h2><p>在使用Ubuntu时未出现此问题，跳过此步骤</p>
+<h3 id="将默认Python版本切换为Python3"><a href="#将默认Python版本切换为Python3" class="headerlink" title="将默认Python版本切换为Python3"></a>将默认Python版本切换为Python3</h3><p><code>sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10 &amp;&amp; alias pip=pip3</code></p>
+<h3 id="设置环境变量1"><a href="#设置环境变量1" class="headerlink" title="设置环境变量1"></a>设置环境变量1</h3><p>防止安装脚本运行时报错</p>
+<p><code>export IDF_PATH=&#39;~/esp/esp-idf&#39;</code></p>
+<h2 id="安装ESP-IDF"><a href="#安装ESP-IDF" class="headerlink" title="安装ESP-IDF"></a>安装ESP-IDF</h2><h3 id="运行安装脚本"><a href="#运行安装脚本" class="headerlink" title="运行安装脚本"></a>运行安装脚本</h3><p><code>cd ~/esp/esp-idf</code><br><code>./install.sh</code></p>
+<h3 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h3><p>在运行脚本前运行此代码，将环境变量导入当前终端</p>
+<p><code>. $HOME/esp/esp-idf/export.sh</code></p>
+<h2 id="第一个工程"><a href="#第一个工程" class="headerlink" title="第一个工程"></a>第一个工程</h2><h3 id="新建工程"><a href="#新建工程" class="headerlink" title="新建工程"></a>新建工程</h3><p>复制ESP-IDF自带的Example进行测试</p>
+<p><code>cd ~/esp</code><br><code>cp -r $IDF_PATH/examples/get-started/hello_world .</code></p>
+<h3 id="连接设备"><a href="#连接设备" class="headerlink" title="连接设备"></a>连接设备</h3><p>使用<code>ls /dev/tty*</code>查看当前设备连接情况后，插入设备，再次输入命令，新增设备即为插入设备</p>
+<h3 id="配置工程"><a href="#配置工程" class="headerlink" title="配置工程"></a>配置工程</h3><p><code>cd ~/esp/hello_world</code><br><code>idf.py set-target esp32</code><br><code>idf.py menuconfig</code></p>
+<p>若报错可指定python3运行idf.py文件</p>
+<h3 id="编译工程"><a href="#编译工程" class="headerlink" title="编译工程"></a>编译工程</h3><p><code>idf.py build</code></p>
+<h3 id="烧录二进制文件"><a href="#烧录二进制文件" class="headerlink" title="烧录二进制文件"></a>烧录二进制文件</h3><p><code>idf.py -p PORT [-b BAUD] flash</code></p>
+<p>PORT为前一步所得到的插入设备端口</p>
+<p>烧录时注意要长按开发板上的复位键</p>
+<h3 id="查看调试信息"><a href="#查看调试信息" class="headerlink" title="查看调试信息"></a>查看调试信息</h3><p><code>idf.py -p PORT monitor</code></p>
+<p>可以观察到开发板的运行状况，使用快捷键 <code>Ctrl+]</code>退出 IDF 监视器</p>
+<p><strong>关联文档：</strong><br>上一篇：无<br>下一篇：[[ESP32开发·[1.2]安装VSCode插件]]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/ESP32%E5%BC%80%E5%8F%91%C2%B7[1.1]Linux%E4%B8%8B%E9%83%A8%E7%BD%B2ESP-IDF%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" data-id="cl9htoe72000744wqf63x3n5c" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux·[0]从零开始安装Manjaro" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/Linux%C2%B7%5B0%5D%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AE%89%E8%A3%85Manjaro/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.499Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="从零开始安装Manjaro"><a href="#从零开始安装Manjaro" class="headerlink" title="从零开始安装Manjaro"></a>从零开始安装Manjaro</h1><p>修改时间：2021.04.01 13:55</p>
+<p>使用环境：Manjaro 2021.1 Minimal</p>
+<h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><h3 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h3><p>进入<a target="_blank" rel="noopener" href="https://manjaro.org/downloads/official/kde/%E4%B8%8B%E8%BD%BD**Minimal**%E7%89%88%E7%9A%84%E9%95%9C%E5%83%8F">https://manjaro.org/downloads/official/kde/下载**Minimal**版的镜像</a></p>
+<p>下载Rufus2.18版本，选择DD模式写入U盘</p>
+<h3 id="安装系统-1"><a href="#安装系统-1" class="headerlink" title="安装系统"></a>安装系统</h3><p>关闭BIOS中BOOT Source项，选择U盘引导启动</p>
+<p>按引导安装系统，安装时保持断网</p>
+<h2 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h2><h3 id="更换系统源"><a href="#更换系统源" class="headerlink" title="更换系统源"></a>更换系统源</h3><p>命令行输入<code>sudo pacman-mirrors -i -c China -m rank</code>，在弹出窗口中选择合适的镜像源</p>
+<p>命令行输入<code>sudo pacman -Syyu</code>更新系统</p>
+<h3 id="添加ArchLinuxcn源"><a href="#添加ArchLinuxcn源" class="headerlink" title="添加ArchLinuxcn源"></a>添加ArchLinuxcn源</h3><p>命令行输入<code>sudo nano /etc/pacman.conf</code>，在最后输入以下内容：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line">SigLevel = Optional TrustAll</span><br><span class="line">Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch</span><br></pre></td></tr></table></figure>
+
+<p>运行<code>sudo pacman -Syy</code>刷新镜像</p>
+<p>运行<code>sudo pacman -S archlinuxcn-keyring</code>安装密钥</p>
+<h3 id="安装AUR工具"><a href="#安装AUR工具" class="headerlink" title="安装AUR工具"></a>安装AUR工具</h3><p>运行<code>sudo pacman -Sy yay</code>安装yay工具</p>
+<h3 id="配置base-devel工具"><a href="#配置base-devel工具" class="headerlink" title="配置base-devel工具"></a>配置base-devel工具</h3><p>运行<code>yay -Sy gcc</code>与<code>yay -Sy fakeroot</code></p>
+<p><strong>注意在此及之后使用yay时不要使用sudo权限</strong></p>
+<p><strong>切勿使用<code>sudo pacman -S base-devel</code>命令直接安装base-devel工具</strong></p>
+<h2 id="安装腾讯软件"><a href="#安装腾讯软件" class="headerlink" title="安装腾讯软件"></a>安装腾讯软件</h2><p>使用<code>yay -S com.qq.im.deepin</code>安装QQ</p>
+<p>使用<code>yay -S com.qq.weixin.deepin</code>安装微信</p>
+<p>因使用KDE桌面环境，需要额外<code>sudo pacman -S xsettingsd</code></p>
+<p>复制windows全部字体进 <strong>.deepinwine&#x2F;Deepin-QQ&#x2F;drive_c&#x2F;windows&#x2F;Fonts</strong> 和**.deepinwine&#x2F;Deepin-WeChat&#x2F;drive_c&#x2F;windows&#x2F;Fonts**目录下</p>
+<p>初次运行会自动配置wine</p>
+<h2 id="安装WPS"><a href="#安装WPS" class="headerlink" title="安装WPS"></a>安装WPS</h2><p>使用<code>yay -S wps-office-cn</code>安装国内版WPS</p>
+<p>使用<code>yay -S wps-office-mui-zh-cn</code>安装中文语言包</p>
+<p>使用<code>yay -S ttf-wps-fonts</code>补充缺失字体</p>
+<p>运行<code>sudo nano /usr/bin/wps</code>，在第一行下补充如下代码：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export XMODIFIERS=&quot;@im=fcitx5&quot;</span><br><span class="line">export QT_IM_MODULE=&quot;fcitx5&quot;</span><br><span class="line">gOpt=</span><br><span class="line"># gOptExt=-multiply</span><br><span class="line">gTemplateExt=(&quot;wpt&quot; &quot;dot&quot; &quot;dotx&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置输入法"><a href="#配置输入法" class="headerlink" title="配置输入法"></a>配置输入法</h2><p>依次运行如下代码：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S fcitx</span><br><span class="line">sudo pacman -S fcitx-im</span><br><span class="line">sudo pacman -S fcitx-configtool</span><br><span class="line">sudo pacman -S fcitx-googlepinyin</span><br><span class="line">sudo touch ~/.pam_environment</span><br><span class="line">sudo chmod 777 ~/.pam_environment</span><br></pre></td></tr></table></figure>
+
+<p>运行<code>nano  ~/.pam_environment </code>添加如下代码：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GTK_IM_MODULE DEFAULT=fcitx</span><br><span class="line">QT_IM_MODULE  DEFAULT=fcitx</span><br><span class="line">XMODIFIERS    DEFAULT=@im=fcitx</span><br><span class="line">INPUT_METHOD  DEFAULT=fcitx</span><br><span class="line">SDL_IM_MODULE DEFAULT=fcitx</span><br></pre></td></tr></table></figure>
+
+<p>运行<code>sudo reboot now</code>重启计算机</p>
+<p>打开fcitx配置工具，进行相关配置</p>
+<h2 id="其他软件"><a href="#其他软件" class="headerlink" title="其他软件"></a>其他软件</h2><h3 id="网易云音乐"><a href="#网易云音乐" class="headerlink" title="网易云音乐"></a>网易云音乐</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -Sy netease-cloud-music</span><br></pre></td></tr></table></figure>
+
+<h3 id="QQ音乐"><a href="#QQ音乐" class="headerlink" title="QQ音乐"></a>QQ音乐</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -Sy cocomusic</span><br></pre></td></tr></table></figure>
+
+<h3 id="V2ray"><a href="#V2ray" class="headerlink" title="V2ray"></a>V2ray</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yay -Sy qv2ray</span><br><span class="line">yay -Sy v2ray</span><br></pre></td></tr></table></figure>
+
+<h3 id="Edge"><a href="#Edge" class="headerlink" title="Edge"></a>Edge</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S microsoft-edge-dev-bin</span><br></pre></td></tr></table></figure>
+
+<p>在地址栏输入<code>edge://flags</code>打开实验性选项页面，接着搜索<code>MSA sign in</code>，将右侧的选项改为<strong>Enabled</strong></p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p><strong>ERROR: Cannot find the strip binary required for object file stripping.</strong></p>
+<p>解决：安装gcc与fakeroot</p>
+<p><strong>安装软件显示：已损坏 (无效或已损坏的软件包 (PGP 签名))</strong></p>
+<p>解决：配置archlinuxcn时SigLevel&#x3D;Optional TrustAll</p>
+<p><strong>开机后会打开关机之前的所有窗口</strong></p>
+<p>解决：<code>kcmshell5 kcm_smserver</code>后勾选<strong>以空白会话启动</strong></p>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>因输入法偶发不显示备选框问题无法解决，于2021年4月1日13:56:42放弃使用Manjaro，转而使用Deepin 20.2，此文完结。</p>
+<p><strong>关联文档：</strong><br>上一篇：无<br>下一篇：[[Linux·[1]Linux入坑指南]]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/Linux%C2%B7[0]%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AE%89%E8%A3%85Manjaro/" data-id="cl9htoe73000844wqassq8gfq" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Git使用教程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/Git%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.499Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Git使用教程"><a href="#Git使用教程" class="headerlink" title="Git使用教程"></a>Git使用教程</h1><p>修改时间：2021.04.17 22:02</p>
+<h2 id="迈出Git的第一步"><a href="#迈出Git的第一步" class="headerlink" title="迈出Git的第一步"></a>迈出Git的第一步</h2><p>在项目工程文件夹中右键选择<strong>Git Bash Here</strong>,在弹出的窗口键入<code>git init</code></p>
+<p><em><strong>这项操作会在此文件夹中建立版本库，.git目录默认隐藏不可见</strong></em></p>
+<p>使用<code>git add *.*</code>添加想加入版本控制的文件</p>
+<p>添加文件后使用<code>git commit -m  &quot;xxxxx&quot;</code>提交一次记录</p>
+<h2 id="推送到远程仓库"><a href="#推送到远程仓库" class="headerlink" title="推送到远程仓库"></a>推送到远程仓库</h2><p>在GitHub上新建一个空仓库</p>
+<p>使用<code>git remote add origin xxxxx</code>添加远程仓库</p>
+<p>使用<code>git push -u origin main</code>将本地文件推送至远程仓库，第一次推送可加入<code>-u</code>参数使二者关联</p>
+<h2 id="从远程仓库拉取"><a href="#从远程仓库拉取" class="headerlink" title="从远程仓库拉取"></a>从远程仓库拉取</h2><h3 id="克隆仓库"><a href="#克隆仓库" class="headerlink" title="克隆仓库"></a>克隆仓库</h3><p>使用<code>git clone xxxxx</code>来获得远程仓库的完整拷贝</p>
+<h3 id="更新仓库"><a href="#更新仓库" class="headerlink" title="更新仓库"></a>更新仓库</h3><p>使用<code>git pull origin master:xxx</code>或<code>git pull</code>将远程仓库拉取并与本地分支合并</p>
+<h2 id="SSL连接"><a href="#SSL连接" class="headerlink" title="SSL连接"></a>SSL连接</h2><p>Git支持多种协议，但通过ssh支持的原生git协议速度最快、最安全</p>
+<p>使用<code>ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</code>在本地创建一个密钥，文件存放在账户主目录下的.ssh文件夹中</p>
+<p>复制<strong>id_rsa.pub</strong>中的内容并在GitHub上新建一个SSH Key时填入</p>
+<p>使用<code>git remote set-url origin git@github.com:someaccount/someproject.git</code>更改与远程仓库的访问方式</p>
+<p>这样就可以使用SSL连接，而不必每次输入账户与密码</p>
+<h2 id="删库跑路第一步"><a href="#删库跑路第一步" class="headerlink" title="删库跑路第一步"></a>删库跑路第一步</h2><p>使用<code>git rm *.*</code>删除不想要的文件</p>
+<p>删除文件后使用<code>git commit -m  &quot;xxxxx&quot;</code>提交一次记录</p>
+<p>还可以使用<code>git push origin master</code>同时删除远程仓库上的文件</p>
+<h2 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h2><p>使用<code>git branch test</code>新建一个test分支</p>
+<p>使用<code>git checkout test</code>切换至新建的分支</p>
+<p>也可以使用<code>git checkout -b test</code>来一步新建并切换分支</p>
+<p>使用<code>git branch</code>来查看所有分支的情况</p>
+<h2 id="多人开发"><a href="#多人开发" class="headerlink" title="多人开发"></a>多人开发</h2><h3 id="情形1："><a href="#情形1：" class="headerlink" title="情形1："></a>情形1：</h3><p>A用户建立了仓库，提交test.txt文件至本地及远程；B用户拉取了远程的仓库。此时所有仓库保持一致</p>
+<p>此时A用户修改test.txt文件，并将其推送至远程仓库；B用户在没有拉取远程仓库变更时修改了本地test.txt，此时B用户使用<code>git push origin main</code>试图将代码推送至远程，git会提示冲突无法处理，并将冲突内容写入test.txt文件中</p>
+<p>这时可以直接打开文件，修改至最终所需要的效果，保存并再次commit，之后继续进行push即可成功推送</p>
+<h3 id="情形2："><a href="#情形2：" class="headerlink" title="情形2："></a>情形2：</h3><p>A用户建立了仓库，提交test.txt文件至本地及远程；B用户拉取了远程的仓库。此时所有仓库保持一致</p>
+<p>此时A用户修改test.txt文件，并将其推送至远程仓库；B用户在没有拉取远程仓库变更时修改了本地test.txt，此时B用户想直接使用远程仓库覆盖本地仓库</p>
+<p>可以使用如下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="代理设置"><a href="#代理设置" class="headerlink" title="代理设置"></a>代理设置</h2><h3 id="设置代理"><a href="#设置代理" class="headerlink" title="设置代理"></a>设置代理</h3><p>使用如下代码将代理设置为1080端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy socks5://127.0.0.1:10808</span><br><span class="line">git config --global https.proxy socks5://127.0.0.1:10808</span><br></pre></td></tr></table></figure>
+
+<h3 id="取消代理"><a href="#取消代理" class="headerlink" title="取消代理"></a>取消代理</h3><p>使用如下代码取消代理设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --unset http.proxy</span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/Git%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" data-id="cl9htoe74000944wqgp03fojl" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux·[2]Linux常用软件安装" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/Linux%C2%B7%5B2%5DLinux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.499Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux常用软件安装"><a href="#Linux常用软件安装" class="headerlink" title="Linux常用软件安装"></a>Linux常用软件安装</h1><table>
+<thead>
+<tr>
+<th>软件</th>
+<th>安装途径</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JetBrains toolbox</td>
+<td>官网下载直接运行</td>
+<td><a target="_blank" rel="noopener" href="https://www.jetbrains.com/toolbox-app/">JetBrains Toolbox App: Manage Your Tools with Ease</a></td>
+</tr>
+<tr>
+<td>CLion</td>
+<td>toolbox自动安装</td>
+<td>-</td>
+</tr>
+<tr>
+<td>IDEA</td>
+<td>toolbox自动安装</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PyCharm</td>
+<td>toolbox自动安装</td>
+<td>-</td>
+</tr>
+<tr>
+<td>AndroidStudio</td>
+<td>toolbox自动安装</td>
+<td>-</td>
+</tr>
+<tr>
+<td>VSCode</td>
+<td>官网下载安装</td>
+<td><a target="_blank" rel="noopener" href="https://code.visualstudio.com/Download">Download Visual Studio Code - Mac, Linux, Windows</a></td>
+</tr>
+<tr>
+<td>git</td>
+<td>命令行</td>
+<td><code>sudo apt install git</code></td>
+</tr>
+<tr>
+<td>gcc</td>
+<td>命令行</td>
+<td><code>sudo apt install gcc</code></td>
+</tr>
+<tr>
+<td>arm-gcc</td>
+<td>官网下载，自己放，添加环境变量</td>
+<td><a target="_blank" rel="noopener" href="https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads">GNU Toolchain</a></td>
+</tr>
+<tr>
+<td>OpenOCD</td>
+<td>命令行</td>
+<td><code>sudo apt install openocd</code></td>
+</tr>
+<tr>
+<td>STM32CubeMX</td>
+<td>官网下载安装</td>
+<td><a target="_blank" rel="noopener" href="https://www.st.com/zh/development-tools/stm32cubemx.html">STM32CubeMX</a></td>
+</tr>
+<tr>
+<td>KiCAD</td>
+<td>官网添加源，命令行</td>
+<td><a target="_blank" rel="noopener" href="https://www.kicad.org/download/ubuntu/">Install on Ubuntu |KiCad EDA</a></td>
+</tr>
+<tr>
+<td>Wechat</td>
+<td>命令行</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/zq1997/deepin-wine">Debian&#x2F;Ubuntu上最快的QQ&#x2F;微信安装方式 (github.com)</a></td>
+</tr>
+<tr>
+<td>QQ</td>
+<td>命令行</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/zq1997/deepin-wine">Debian&#x2F;Ubuntu上最快的QQ&#x2F;微信安装方式 (github.com)</a></td>
+</tr>
+<tr>
+<td>QQMusic</td>
+<td>官网下载安装</td>
+<td><a target="_blank" rel="noopener" href="https://y.qq.com/download/download.html">QQ音乐下载页 - QQ音乐,音乐你的生活!</a></td>
+</tr>
+<tr>
+<td>VLC</td>
+<td>命令行</td>
+<td><code>sudo apt install vlc</code></td>
+</tr>
+<tr>
+<td>Typora</td>
+<td>官网添加源，命令行</td>
+<td><a target="_blank" rel="noopener" href="https://www.typora.io/#linux">Typora — a markdown editor, markdown reader.</a></td>
+</tr>
+<tr>
+<td>keepassXC</td>
+<td>命令行</td>
+<td><code>sudo apt install keepassXC</code></td>
+</tr>
+<tr>
+<td>vncviewer</td>
+<td>官网下载安装</td>
+<td><a target="_blank" rel="noopener" href="https://www.realvnc.com/en/connect/download/viewer/linux/">Download VNC Viewer for Linux</a></td>
+</tr>
+<tr>
+<td>Arduino</td>
+<td>命令行</td>
+<td><a target="_blank" rel="noopener" href="https://www.arduino.cc/en/software">Software |Arduino</a></td>
+</tr>
+<tr>
+<td>WPS</td>
+<td>官网下载安装</td>
+<td><a target="_blank" rel="noopener" href="https://linux.wps.cn/">WPS Office 2019 For Linux</a></td>
+</tr>
+<tr>
+<td>Edge</td>
+<td>官网下载安装</td>
+<td><a target="_blank" rel="noopener" href="https://www.microsoftedgeinsider.com/en-us/download/">Download Microsoft Edge Insider Channels</a></td>
+</tr>
+<tr>
+<td>Clash&#x2F;qV2ray</td>
+<td>github下载</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases">Releases · Dreamacro&#x2F;clash (github.com)</a>&#x2F;<a target="_blank" rel="noopener" href="https://github.com/Qv2ray/Qv2ray/releases">Releases · Qv2ray&#x2F;Qv2ray (github.com)</a></td>
+</tr>
+<tr>
+<td>BaiduDisk</td>
+<td>官网下载安装</td>
+<td><a target="_blank" rel="noopener" href="http://pan.baidu.com/download">百度网盘 客户端下载 (baidu.com)</a></td>
+</tr>
+</tbody></table>
+<p><strong>关联文档：</strong><br>上一篇：[[Linux·[1]Linux入坑指南]]<br>下一篇：[[Linux·[3]Linux下配置clash]]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/Linux%C2%B7[2]Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" data-id="cl9htoe74000a44wqgsm18k72" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux·[4]在Ubuntu上部署QT6开发环境" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/Linux%C2%B7%5B4%5D%E5%9C%A8Ubuntu%E4%B8%8A%E9%83%A8%E7%BD%B2QT6%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.499Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="在Ubuntu上部署QT6开发环境"><a href="#在Ubuntu上部署QT6开发环境" class="headerlink" title="在Ubuntu上部署QT6开发环境"></a>在Ubuntu上部署QT6开发环境</h1><p>修改时间：2022.06.28 14:15</p>
+<p>使用环境：Ubuntu22.04</p>
+<h2 id="下载QT在线安装包"><a href="#下载QT在线安装包" class="headerlink" title="下载QT在线安装包"></a>下载QT在线安装包</h2><p>在QT官网下载.run格式的安装包</p>
+<h2 id="对安装包提权"><a href="#对安装包提权" class="headerlink" title="对安装包提权"></a>对安装包提权</h2><p>右键安装包，点击属性，在权限中勾选允许执行文件</p>
+<h2 id="使用镜像服务器安装"><a href="#使用镜像服务器安装" class="headerlink" title="使用镜像服务器安装"></a>使用镜像服务器安装</h2><p>打开终端输入<code>./qt-unified-linux-x64-4.4.1-online.run --mirror https://mirrors.tuna.tsinghua.edu.cn/qt</code>使用清华源安装</p>
+<h2 id="选择开发套件"><a href="#选择开发套件" class="headerlink" title="选择开发套件"></a>选择开发套件</h2><p>在安装时选择Desktop套件</p>
+<h2 id="安装必要依赖库"><a href="#安装必要依赖库" class="headerlink" title="安装必要依赖库"></a>安装必要依赖库</h2><p>打开终端输入<code>sudo apt install libgl-dev</code>安装OpenGL依赖</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/Linux%C2%B7[4]%E5%9C%A8Ubuntu%E4%B8%8A%E9%83%A8%E7%BD%B2QT6%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" data-id="cl9htoe75000b44wqavy27w9w" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux·[3]Linux下配置clash" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/Linux%C2%B7%5B3%5DLinux%E4%B8%8B%E9%85%8D%E7%BD%AEclash/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.499Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux下配置clash"><a href="#Linux下配置clash" class="headerlink" title="Linux下配置clash"></a>Linux下配置clash</h1><p>修改时间：2021.01.31 11:47</p>
+<p>使用环境：Deepin 20.1 clash1.3.5</p>
+<h2 id="下载clash二进制文件"><a href="#下载clash二进制文件" class="headerlink" title="下载clash二进制文件"></a>下载clash二进制文件</h2><p>进入<a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases">https://github.com/Dreamacro/clash/releases</a>下载最新版二进制文件，注意系统类型</p>
+<p>将二进制文件放在<code>~/clash/</code>文件夹中</p>
+<p>右键clash二进制文件，允许文件以程序方式启动</p>
+<h2 id="下载config文件"><a href="#下载config文件" class="headerlink" title="下载config文件"></a>下载config文件</h2><p>去机场下载clash所需的config文件</p>
+<p>将config文件放在<code>~/clash/</code>文件夹中</p>
+<h2 id="等待下载Country-mmdb文件"><a href="#等待下载Country-mmdb文件" class="headerlink" title="等待下载Country.mmdb文件"></a>等待下载Country.mmdb文件</h2><p>clash会自动下载Country.mmdb文件，该步骤会很慢，可以使用手机代理后开放热点进行下载</p>
+<h2 id="配置clash"><a href="#配置clash" class="headerlink" title="配置clash"></a>配置clash</h2><p>浏览器进入<a target="_blank" rel="noopener" href="http://clash.razord.top/">http://clash.razord.top/</a>配置相关节点</p>
+<p>配置完成后在系统代理中设置HTTP代理为<code>http://127.0.0.1:7890</code></p>
+<p>设置Socks代理为<code>http://127.0.0.1:7891</code></p>
+<p>在终端中可使用<code>export http_proxy=&quot;http://127.0.0.1:7890&quot;</code></p>
+<p><code>export https_proxy=&quot;http://127.0.0.1:7890&quot;</code>针对当前终端进行代理</p>
+<h2 id="手动开启clash"><a href="#手动开启clash" class="headerlink" title="手动开启clash"></a>手动开启clash</h2><p>终端输入以下命令可以手动开启clash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd clash</span><br><span class="line">./clash -d .</span><br></pre></td></tr></table></figure>
+
+<p>使用这种方法打开clash时，使用全程不能关闭当前终端</p>
+<h2 id="加载系统服务"><a href="#加载系统服务" class="headerlink" title="加载系统服务"></a>加载系统服务</h2><p>进入clash文件夹，将文件复制到相应位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd clash</span><br><span class="line">cp clash /usr/local/bin</span><br><span class="line">cp config.yaml /etc/clash/</span><br><span class="line">cp Country.mmdb /etc/clash/</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>sudo nano /etc/systemd/system/clash.service</code>新建服务，输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Clash Daemon</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">ExecStart=/usr/local/bin/clash -d /etc/clash/</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>systemctl enable clash</code>设置clash开机自启动</p>
+<p>使用<code>systemctl start clash</code>开启clash</p>
+<p>使用<code>systemctl restart clash</code>重启clash</p>
+<p>使用<code>systemctl stop clash</code>关闭clash</p>
+<p>使用<code>systemctl status clash</code>查看服务运行状况</p>
+<p>使用<code>systemctl list-units --type=service</code>查看当前正在运行的服务</p>
+<p><strong>关联文档：</strong><br>上一篇：[[Linux·[2]Linux常用软件安装]]<br>下一篇：[[Linux·[4]在Ubuntu上部署QT6开发环境]]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/Linux%C2%B7[3]Linux%E4%B8%8B%E9%85%8D%E7%BD%AEclash/" data-id="cl9htoe76000c44wq9ij5a9s2" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-README" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/README/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.499Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="README"><a href="#README" class="headerlink" title="README"></a>README</h1><p>此仓库为个人笔记存储仓库，仅针对个人在编程实践过程中的一些问题进行记录，不一定具有可推广性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/README/" data-id="cl9htoe77000f44wq1wn6f212" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux·[1]Linux入坑指南" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/Linux%C2%B7%5B1%5DLinux%E5%85%A5%E5%9D%91%E6%8C%87%E5%8D%97/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.499Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux入坑指南"><a href="#Linux入坑指南" class="headerlink" title="Linux入坑指南"></a>Linux入坑指南</h1><p>本指南是笔者摸鱼时所编写的，旨在帮助从未接触或浅尝过Linux的同学快速上手使用Linux。受限于笔者自身水平，指南中可能存在不当阐述、可能存在相关科技野史，敬请理解。</p>
+<h2 id="第1节-什么是Linux"><a href="#第1节-什么是Linux" class="headerlink" title="第1节 什么是Linux"></a>第1节 什么是Linux</h2><h3 id="1-1-Linux-Kernel"><a href="#1-1-Linux-Kernel" class="headerlink" title="1.1 Linux Kernel"></a>1.1 Linux Kernel</h3><p>上世纪70年代，美国AT&amp;T公司下属的贝尔实验室开发了一款名为UNIX（Uniplexed Information and Computing Service，非复用信息和计算机服务）的计算机操作系统，并以低廉甚至免费的价格将UNIX授权给学术机构使用。1979年，AT&amp;T将UNIX源代码私有化，学术机构不再能使用UNIX的代码，荷兰阿姆斯特丹自由大学的教授Andrew S. Tanenbaum在不使用AT&amp;T代码的前提下，开发了一款能用兼容UNIX的系统用于教学，取名为MINIX。1991年，一个名为Linus Benedict Torvalds的芬兰大学生在接触MINIX后，不满足其被限制于教学，于是自己编写了一套内核，并将其放在了学校的FTP服务器上，最初Linus把这个内核叫做Freax，但是学校的管理员认为这个名字不好听，于是把他改成了Linux，Linux的传奇从这里开始了。</p>
+<p>如今，Linus就职于OSDL（Open Source Development Labs，开源码发展实验室），担任Linux内核的主要维护者。</p>
+<p><img src="/pic/linux.jpg" alt="Linux"></p>
+<blockquote>
+<p>这只企鹅是Linux的标志，选择他的原因据说是Linus曾在动物园被企鹅咬过。</p>
+</blockquote>
+<h3 id="1-2-Linux发行版"><a href="#1-2-Linux发行版" class="headerlink" title="1.2 Linux发行版"></a>1.2 Linux发行版</h3><p>上面说到，Linus只发布了Linux的内核，而操作系统单单只有内核是不够的，还需要许多配套的软件。例如微软最新的Windows11操作系统，其搭载了Windows NT 10.0内核和微软众多配套的软件。一些组织团体和公司将配套的软件合并起来，与Linux内核一起打包，形成Linux的发行版，这才形成了我们常说的Linux操作系统。目前，有超过300种发行版被积极开发，较为知名的有Debian系的Ubuntu、RHEL系的CentOS以及Arch系Arch Linux。此外我们常用的Android在某种角度也是Linux的发行版，我们可以在手机的设置中查看其搭载的Linux内核版本。</p>
+<h4 id="1-2-1-CentOS"><a href="#1-2-1-CentOS" class="headerlink" title="1.2.1 CentOS"></a>1.2.1 CentOS</h4><p>CentOS（Community Enterprise Operating System，社区企业操作系统）是RHEL（Red Hat Enterprise Linux）系统的再发行版。CentOS与RHEL出自同样的源代码，其中，RHEL是Red Hat公司开发的针对商业市场的Linux发行版，使用RHEL的企业需要向Red Hat支付响应的费用，而Red Hat也会向其提供相应的技术支持；CentOS则免费向所有用户开放，但客户无法获得官方的技术支持。由于CentOS的开放，其获得了国内众多互联网企业的支持，大量的服务器均采用CentOS，令人惋惜的是，CentOS开发团队于2020年12月8日宣布，传统的CentOS 8将仅维护至2021年底，也就是说，如今的CentOS已经停止更新。</p>
+<h4 id="1-2-2-Arch-Linux"><a href="#1-2-2-Arch-Linux" class="headerlink" title="1.2.2 Arch Linux"></a>1.2.2 Arch Linux</h4><p>Arch Linux是一个加拿大吉他手开发的Linux发行版。Arch Linux 项目注力于简洁主义，其贡献在于对发行版的组件提供具有良好注释的配置文件，而非带有图形界面的配置工具。与其他发行版每隔一段时间就发布一个大版本更新不同，Arch Linux致力于通过滚动发布来提供大多数软件的最新稳定版本，只要保证合理使用，就可以很好的避免系统的损坏。目前Arch Linux仍然保持更新。</p>
+<h4 id="1-2-3-Ubuntu"><a href="#1-2-3-Ubuntu" class="headerlink" title="1.2.3 Ubuntu"></a>1.2.3 Ubuntu</h4><p>与前两个发行版相比，Ubuntu的知名度更高，其常年位于Linux发行版装机排行榜前列，由英国Canonical公司发布并提供有偿商业支持。Ubuntu专注于桌面领域，为用户提供了众多便利，受到广大开发者青睐。Ubuntu每两年发布一个LTS（Long-Term Support）版本，并提供3年的更新支持。</p>
+<h4 id="1-2-4-国产操作系统"><a href="#1-2-4-国产操作系统" class="headerlink" title="1.2.4 国产操作系统"></a>1.2.4 国产操作系统</h4><p>目前国内大力扶持的国产操作系统UOS（Unite Operating System，统一操作系统）是基于Debian开发的Linux发行版，其针对国内开发者与普通消费者对系统进行了大刀阔斧的改动，使得系统更符合人们日常使用需要。</p>
+<p>UOS的前身Deepin OS是深度科技（就是最初做盗版Windows XP的那个深度）开发的Linux发行版，其先后基于Ubuntu和Debian进行开发，日前，深度已经宣布后续的Deepin将基于上游Linux直接开发，届时Deepin的国产化程度将进一步上升。</p>
+<p>华为公司捐赠给开放原子开源基金会的openEuler（欧拉操作系统）也是国产操作系统的另一只力量，其主要针对服务器领域，针对各类国产平台进行了专门的优化，其希望在后CentOS时代占有更多市场份额。</p>
+<h3 id="1-3-小结"><a href="#1-3-小结" class="headerlink" title="1.3 小结"></a>1.3 小结</h3><p>本节介绍了Linux内核的发展历史以及各种发行版，帮助大家了解Linux的历史。后续，本文将基于Ubuntu介绍Linux的使用方法。</p>
+<h2 id="第2节-Ubuntu的安装"><a href="#第2节-Ubuntu的安装" class="headerlink" title="第2节 Ubuntu的安装"></a>第2节 Ubuntu的安装</h2><p>ISO下载</p>
+<p>U盘</p>
+<p>BIOS启动项设置</p>
+<p>硬盘分区</p>
+<p>虚拟机</p>
+<p>启用SSH&#x2F;VNC</p>
+<h2 id="第3节-环境搭建"><a href="#第3节-环境搭建" class="headerlink" title="第3节 环境搭建"></a>第3节 环境搭建</h2><h3 id="3-1-包管理工具"><a href="#3-1-包管理工具" class="headerlink" title="3.1 包管理工具"></a>3.1 包管理工具</h3><p>我们在使用Windows系统安装我们需要的软件时，通常需要打开浏览器，打开百度，搜索我们需要的软件名，找到它的安装包（exe或msi格式的可执行文件），下载后双击运行安装<del>（然后出现2345全家桶）</del>。Ubuntu为我们提供了便利的包管理工具apt（Advanced Packaging Tool），我们日常所需的绝大部分软件都可以由APT直接下载安装，省去了寻找安装包的过程，大大提高了系统的维护效率。</p>
+<p>APT的服务器位于国外，由于众所周知的原因，我们访问国外服务器的速度十分缓慢，有时甚至无法访问，因此，我们需要配置apt的国内镜像源来加速APT的下载。</p>
+<p>常用的国内的镜像源有：清华源、中科大源、网易源、阿里源等，本文以清华源为例，配置apt的镜像源。</p>
+<p>使用火狐浏览器打开<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/">清华大学开源软件镜像站</a>，搜索ubuntu，点击搜索到的第一项ubuntu后的问号进入帮助页面。</p>
+<p><img src="/pic/image-20220722193042062.png" alt="image-20220722193042062"></p>
+<p>选择Ubuntu的版本，本文依旧以最新的22.04LTS为例。根据帮助文档可以知道，Ubuntu 的软件源配置文件是 <code>/etc/apt/sources.list</code>，我们先对系统文件进行备份，然后将其替换成清华源即可。</p>
+<p>使用<code>Ctrl + ALT + T</code>调出终端，输入<code>cp /etc/apt/sources.list /etc/apt/sources.list.bak</code>，使用<code>cp</code>命令将<code>/etc/apt/sources.list</code>文件复制到<code>/etc/apt/sources.list.bak</code>。</p>
+<p>不出意外的话，意外出现了。系统提示“权限不够，无法创建文件”，这是为什么呢？由于我们复制的是系统文件，普通用户组的权限不够，无法完成任务，因此，我们需要使用<code>sudo</code>命令，启用管理员权限来完成复制操作。再次输入<code>sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak</code>（此处可以点击键盘上键快速转到上一条指令），按下回车，输入账户密码，即可完成复制。注意，输入密码时，终端上不会显示任何字符，只要正确输入密码后按下回车即可。</p>
+<p>复制后，我们开始对原始文件进行编辑。对于桌面端，我们可以使用gedit对文档进行编辑。输入命令<code>sudo gedit /etc/apt/sources.list  </code>，使用Ubuntu自带的文本编辑器gedit打开文件，我们将其存在的所有字符删除，然后粘贴帮助页面提供的内容，保存后即可退出。对于服务器端，没有图形运行环境，我们可以使用nano对文档进行编辑。输入命令<code>sudo nano /etc/apt/sources.list  </code>，使用命令行软件nano编辑文件，将其存在的所有字符删除后，右键鼠标粘贴帮助页面提供的内容，之后使用<code>Ctrl + O</code>写入文件，使用<code>Ctrl + X</code>退出编辑。</p>
+<p>完成镜像源配置后，我们就可以使用apt更新系统组件了。输入命令<code>sudo apt update</code>，apt会更新自身的索引，在经过短暂的等待后，apt会列出可用的更新，输入<code>sudo apt upgrade</code>即可更新全部软件。</p>
+<h3 id="3-2-Python开发环境"><a href="#3-2-Python开发环境" class="headerlink" title="3.2 Python开发环境"></a>3.2 Python开发环境</h3><h4 id="3-2-1-Python"><a href="#3-2-1-Python" class="headerlink" title="3.2.1 Python"></a>3.2.1 Python</h4><p>在本文所使用的Ubuntu22.04中，系统已默认安装了Python3.10版本，无需额外安装Python。</p>
+<h4 id="3-2-2-pip"><a href="#3-2-2-pip" class="headerlink" title="3.2.2 pip"></a>3.2.2 pip</h4><p>系统并未安装Python的包管理工具pip，我们需要进行额外的安装。</p>
+<p>使用<code>Ctrl + ALT + T</code>调出终端，输入<code>sudo apt install python3-pip</code>，在apt询问是否安装时，输入Y后回车或直接回车同意继续安装。</p>
+<p><img src="/pic/image-20220722202216121.png" alt="image-20220722202216121"></p>
+<p>稍作等待后即可成果安装。输入<code>pip -V</code>验证配置是否成果，配置无误时会返回pip和python的版本号。</p>
+<p><img src="/pic/image-20220722202401617.png" alt="image-20220722202401617"></p>
+<p>与apt相同的，pip的服务器也位于国外，访问速度较慢，我们需要对pip配置镜像源。常用的源有清华源、豆瓣源、阿里源等，本文以清华源为例进行配置。</p>
+<p>输入命令<code>mkdir ~/.pip</code>，在根目录下创建一个名为<code>.pip</code>的文件夹，输入命令<code>nano ~/.pip/pip.conf</code>创建配置文件，输入以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">timeout = 6000</span><br><span class="line">index-url = https://pypi.tuna.tsinghua.edu.cn/simple/</span><br></pre></td></tr></table></figure>
+
+<p>之后使用<code>Ctrl + O</code>写入文件，使用<code>Ctrl + X</code>退出编辑，即可完成对pip的镜像源配置。</p>
+<h4 id="3-2-3-Anaconda"><a href="#3-2-3-Anaconda" class="headerlink" title="3.2.3 Anaconda"></a>3.2.3 Anaconda</h4><p>Anaconda是可以便捷获取包且对包能够进行管理，同时对环境可以统一管理的Python发行版本。Anaconda包含了conda、Python在内的超过180个科学包及其依赖项。我们在开发不同项目时使用的包版本可能不尽相同，因此使用Anaconda对生成虚拟环境，不同环境间存在隔离，便于开发。</p>
+<p>终端输入命令<code>sudo apt install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6</code>安装Anaconda运行所需要的环境</p>
+<p>浏览器打开<a target="_blank" rel="noopener" href="https://www.anaconda.com/products/distribution#linux">Anaconda</a>的下载页面，点击右侧的绿色下载按钮，可以得到sh格式的安装文件</p>
+<p>进入下载文件夹，打开终端，输入命令<code>bash ./Anaconda3-2022.05-Linux-x86_64.sh</code>即可开始安装。</p>
+<p>终端开始打印安装相关事宜，一路回车后输入<code>yes</code>接收安装许可，继续回车将Anaconda安装至默认目录（官方推荐），等待片刻后即可完成安装。</p>
+<p>安装完成后输入<code>sudo nano ~/.bashrc</code>，将光标移动至文件最下方，加入<code>export PATH=&quot;/home/USERNAME/anaconda3/bin:$PATH&quot;</code>（USERNAME用自己的用户名代替），使用<code>Ctrl + O</code>写入文件，使用<code>Ctrl + X</code>退出编辑，输入<code>source ~/.bashrc</code>更新环境变量。输入<code>anaconda-navigator</code>即可打开图形化管理页面。</p>
+<p>Anaconda换清华源</p>
+<h3 id="3-3-C-x2F-C-开发环境"><a href="#3-3-C-x2F-C-开发环境" class="headerlink" title="3.3 C&#x2F;C++开发环境"></a>3.3 C&#x2F;C++开发环境</h3><p>在Windows平台，我们常使用微软的Visual Studio进行C&#x2F;C++开发。在Ubuntu上，有许多种开发C&#x2F;C++的办法，此处介绍GCC的开发环境。</p>
+<p>使用<code>Ctrl + ALT + T</code>调出终端，分别输入<code>sudo apt install gcc</code>和<code>sudo apt install g++</code>，即可完成GCC套件的安装。输入<code>gcc -v</code>和<code>g++ -v</code>即可验证配置是否正确，在配置正确时，终端会打印出gcc的版本信息。</p>
+<p><img src="/pic/image-20220722195553393.png" alt="image-20220722195553393"></p>
+<p>接下来我们尝试使用gcc编译c文件。</p>
+<p>输入命令<code>touch main.c</code>，在根目录下创建一个名为<code>main.c</code>的文件，这是一个标准的C语言文件。接着输入<code>nano main.c</code>使用nano打开这个文件，输入经典的HelloWorld代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Hello World!\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输入完成后使用<code>Ctrl + O</code>写入文件，使用<code>Ctrl + X</code>退出编辑。</p>
+<p>输入命令<code>gcc main.c</code>对该文件进去参数缺省的编译，编译结束后输入<code>ls</code>命令，<code>ls</code>命令可以展示所在目录下的所有文件，我们可以看到目录下存在一个名为<code>a.out</code>的文件，这就是参数缺省编译出的文件。</p>
+<p>在终端输入<code>a.out</code>尝试运行我们编译的程序，不出意外的话，意外又出现了，系统又提示我们“未找到命令”，这是因为Linux在执行二进制文件时的搜索目录默认不包括当前目录，因此Linux找不到我们要执行的<code>a.out</code>文件，我们需要加上他所在的目录，才能使Linux正确地找到并执行这个文件。</p>
+<p>使用相对路径<code>./</code>，输入<code>./a.out</code>，就可以看到“Hello World!”被打印在终端上。</p>
+<h3 id="3-4-代码编辑器"><a href="#3-4-代码编辑器" class="headerlink" title="3.4 代码编辑器"></a>3.4 代码编辑器</h3><p>VSCode（Visual Studio Code）是微软基于Electron开发的跨平台编辑器，默认支持非常多的编程语言，包括 JavaScript、TypeScript、CSS 和 HTML；也可以通过下载扩展支持 Python、C&#x2F;C++、Java 和 Go 在内的其他语言。在 2019 年的 Stack Overflow 组织的开发者调查中，Visual Studio Code 被认为是最受开发者欢迎的开发环境。下面介绍VSCode的安装与配置。</p>
+<p>使用浏览器打开<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a>官网，点击左侧蓝色的下载按钮，即可得到deb格式的安装包，打开后就可以使用软件安装管理器安装VSCode，安装结束后可以在软件菜单中找到VSCode，单击打开。</p>
+<p>VSCode默认使用英文界面，我们先对其进行汉化。点击左侧工具栏最下方的按钮，在弹出的界面中输入chinese，在搜索到的拓展中选择<code>Chinese(Simplified)(简体中文)</code>一项，单击<code>install</code>进行安装，并根据软件提示重启软件，重启过后的软件便完成汉化。</p>
+<p><img src="/pic/image-20220722201243264.png" alt="image-20220722201243264"></p>
+<p>我们继续安装常用的拓展项，搜索<code>Material</code>选择<code>Material Icon Theme</code>安装图标主题；搜索<code>C</code>选择<code>C/C++</code>和<code>C/C++ Extension Pack</code>安装C&#x2F;C++增强支持；搜索<code>python</code>选择<code>Python</code>和<code>Python Extension Pack</code>安装Python增强支持；搜索Markdown选择<code>Markdown All in One</code>安装Markdown支持。</p>
+<h3 id="3-5-集成开发环境"><a href="#3-5-集成开发环境" class="headerlink" title="3.5 集成开发环境"></a>3.5 集成开发环境</h3><p>安装jetbrains全家桶</p>
+<p>注册学生账户</p>
+<h3 id="3-6-深度学习环境"><a href="#3-6-深度学习环境" class="headerlink" title="3.6 深度学习环境"></a>3.6 深度学习环境</h3><p>NVIDIA驱动</p>
+<p>CUDA驱动</p>
+<p>CUDNN驱动</p>
+<p>安装pytorch</p>
+<p><strong>关联文档：</strong><br>上一篇：[[Linux·[0]从零开始安装Manjaro]]<br>下一篇：[[Linux·[2]Linux常用软件安装]]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/Linux%C2%B7[1]Linux%E5%85%A5%E5%9D%91%E6%8C%87%E5%8D%97/" data-id="cl9htoe78000g44wq9dl86ejv" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Android Developer Learning Path" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/Android%20Developer%20Learning%20Path/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.483Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Android-Developer-Learning-Path"><a href="#Android-Developer-Learning-Path" class="headerlink" title="Android Developer Learning Path"></a>Android Developer Learning Path</h1><h1 id="Programming"><a href="#Programming" class="headerlink" title="Programming"></a>Programming</h1><h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><ul>
+<li><input disabled="" type="checkbox"> Android第一行代码</li>
+</ul>
+<h3 id="Kotlin"><a href="#Kotlin" class="headerlink" title="Kotlin"></a>Kotlin</h3><ul>
+<li><input disabled="" type="checkbox"> Android第一行代码Kotlin版</li>
+</ul>
+<h3 id="Flutter"><a href="#Flutter" class="headerlink" title="Flutter"></a><em><del>Flutter</del></em></h3><h3 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h3><h3 id="Project-Structure"><a href="#Project-Structure" class="headerlink" title="Project Structure"></a>Project Structure</h3><h3 id="Android-Based-Knowledge"><a href="#Android-Based-Knowledge" class="headerlink" title="Android Based Knowledge"></a>Android Based Knowledge</h3><h4 id="The-four-major-components-of-Android"><a href="#The-four-major-components-of-Android" class="headerlink" title="The four major components of Android"></a>The four major components of Android</h4><p>Activity</p>
+<p>Service</p>
+<p>Broadcast Receiver</p>
+<p>Content Provider</p>
+<h4 id="Intents"><a href="#Intents" class="headerlink" title="Intents"></a>Intents</h4><h4 id="Static-User-Interface"><a href="#Static-User-Interface" class="headerlink" title="Static User Interface"></a>Static User Interface</h4><h5 id="View"><a href="#View" class="headerlink" title="View"></a>View</h5><p>Button</p>
+<p>ImageView</p>
+<p>TextView</p>
+<p>EditText</p>
+<p>etc.</p>
+<h5 id="ViewGroup"><a href="#ViewGroup" class="headerlink" title="ViewGroup"></a>ViewGroup</h5><p>LinearLayout</p>
+<p>RelativeLayout</p>
+<p>FrameLayout</p>
+<h5 id="ConstraintLayout"><a href="#ConstraintLayout" class="headerlink" title="ConstraintLayout"></a>ConstraintLayout</h5><h4 id="Dynamic-User-Interface"><a href="#Dynamic-User-Interface" class="headerlink" title="Dynamic User Interface"></a>Dynamic User Interface</h4><p>RecyclerView</p>
+<p>ViewPager</p>
+<p>Spinner</p>
+<h4 id="CustomView"><a href="#CustomView" class="headerlink" title="CustomView"></a>CustomView</h4><p>Canvas</p>
+<p>Bitmap</p>
+<p>Paint</p>
+<h4 id="UI-Resources"><a href="#UI-Resources" class="headerlink" title="UI Resources"></a>UI Resources</h4><p>Drawables</p>
+<p>String</p>
+<p>Styles</p>
+<h4 id="Fragments"><a href="#Fragments" class="headerlink" title="Fragments"></a>Fragments</h4><h4 id="Support-User-Interface"><a href="#Support-User-Interface" class="headerlink" title="Support User Interface"></a>Support User Interface</h4><p>ProgressBar</p>
+<p>Dialogs</p>
+<p>Toast</p>
+<p>Snackbar</p>
+<h4 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h4><p>Shared Preferences</p>
+<p>File Systems</p>
+<p>RoomDB</p>
+<h4 id="Build"><a href="#Build" class="headerlink" title="Build"></a>Build</h4><h4 id="Threading"><a href="#Threading" class="headerlink" title="Threading"></a>Threading</h4><h4 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h4><h4 id="Memory-Leak"><a href="#Memory-Leak" class="headerlink" title="Memory Leak"></a>Memory Leak</h4><h4 id="3rd-Party-Library"><a href="#3rd-Party-Library" class="headerlink" title="3rd Party Library"></a>3rd Party Library</h4><h4 id="Data-Format"><a href="#Data-Format" class="headerlink" title="Data Format"></a>Data Format</h4><p>JSON</p>
+<p>Flat Buffer</p>
+<p>Protocol Buffer</p>
+<h4 id="Android-Jetpack"><a href="#Android-Jetpack" class="headerlink" title="Android Jetpack"></a>Android Jetpack</h4><p>Foundation Components — AppCompat, Android KTX, Multidex</p>
+<p>Architecture Components — LiveData, ViewModel, DataBinding, Paging, Work Manager, Navigation</p>
+<p>Behaviour Components - Download Manager, Media Playback, Notification, Permissions, Preference, Sharing, Slice</p>
+<p>UI Component - Animation &amp; Transition, Android Auto, Emoji, Palette, Android TV, Android Wear</p>
+<h2 id="Design"><a href="#Design" class="headerlink" title="Design"></a>Design</h2><h3 id="Material-Design"><a href="#Material-Design" class="headerlink" title="Material Design"></a>Material Design</h3><h3 id="Photoshop"><a href="#Photoshop" class="headerlink" title="Photoshop"></a>Photoshop</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/Android%20Developer%20Learning%20Path/" data-id="cl9htoe6u000044wq2kyu6hhv" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.1%5DLinux%E4%B8%8B%E9%83%A8%E7%BD%B2%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.2%5D%E7%AC%94%E8%AE%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.3%5DDSP%E5%8A%9F%E8%83%BD/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/WordPress%C2%B7%5B1%5D%E5%9C%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E4%B8%8A%E9%83%A8%E7%BD%B2WordPress%20I/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/WordPress%C2%B7%5B3%5D%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E9%83%A8%E7%BD%B2WordPress/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

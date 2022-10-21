@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Linux下配置clash修改时间：2021.01.31 11:47 使用环境：Deepin 20.1 clash1.3.5 下载clash二进制文件进入https:&#x2F;&#x2F;github.com&#x2F;Dreamacro&#x2F;clash&#x2F;releases下载最新版二进制文件，注意系统类型 将二进制文件放在~&#x2F;clash&#x2F;文件夹中 右键clash二进制文件，允许文件以程序方式启动 下载config文件去机场下载c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/10/21/Linux%C2%B7[3]Linux%E4%B8%8B%E9%85%8D%E7%BD%AEclash/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux下配置clash修改时间：2021.01.31 11:47 使用环境：Deepin 20.1 clash1.3.5 下载clash二进制文件进入https:&#x2F;&#x2F;github.com&#x2F;Dreamacro&#x2F;clash&#x2F;releases下载最新版二进制文件，注意系统类型 将二进制文件放在~&#x2F;clash&#x2F;文件夹中 右键clash二进制文件，允许文件以程序方式启动 下载config文件去机场下载c">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-21T01:37:26.499Z">
+<meta property="article:modified_time" content="2022-08-10T03:45:27.389Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Linux·[3]Linux下配置clash" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/Linux%C2%B7%5B3%5DLinux%E4%B8%8B%E9%85%8D%E7%BD%AEclash/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.499Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux下配置clash"><a href="#Linux下配置clash" class="headerlink" title="Linux下配置clash"></a>Linux下配置clash</h1><p>修改时间：2021.01.31 11:47</p>
+<p>使用环境：Deepin 20.1 clash1.3.5</p>
+<h2 id="下载clash二进制文件"><a href="#下载clash二进制文件" class="headerlink" title="下载clash二进制文件"></a>下载clash二进制文件</h2><p>进入<a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases">https://github.com/Dreamacro/clash/releases</a>下载最新版二进制文件，注意系统类型</p>
+<p>将二进制文件放在<code>~/clash/</code>文件夹中</p>
+<p>右键clash二进制文件，允许文件以程序方式启动</p>
+<h2 id="下载config文件"><a href="#下载config文件" class="headerlink" title="下载config文件"></a>下载config文件</h2><p>去机场下载clash所需的config文件</p>
+<p>将config文件放在<code>~/clash/</code>文件夹中</p>
+<h2 id="等待下载Country-mmdb文件"><a href="#等待下载Country-mmdb文件" class="headerlink" title="等待下载Country.mmdb文件"></a>等待下载Country.mmdb文件</h2><p>clash会自动下载Country.mmdb文件，该步骤会很慢，可以使用手机代理后开放热点进行下载</p>
+<h2 id="配置clash"><a href="#配置clash" class="headerlink" title="配置clash"></a>配置clash</h2><p>浏览器进入<a target="_blank" rel="noopener" href="http://clash.razord.top/">http://clash.razord.top/</a>配置相关节点</p>
+<p>配置完成后在系统代理中设置HTTP代理为<code>http://127.0.0.1:7890</code></p>
+<p>设置Socks代理为<code>http://127.0.0.1:7891</code></p>
+<p>在终端中可使用<code>export http_proxy=&quot;http://127.0.0.1:7890&quot;</code></p>
+<p><code>export https_proxy=&quot;http://127.0.0.1:7890&quot;</code>针对当前终端进行代理</p>
+<h2 id="手动开启clash"><a href="#手动开启clash" class="headerlink" title="手动开启clash"></a>手动开启clash</h2><p>终端输入以下命令可以手动开启clash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd clash</span><br><span class="line">./clash -d .</span><br></pre></td></tr></table></figure>
+
+<p>使用这种方法打开clash时，使用全程不能关闭当前终端</p>
+<h2 id="加载系统服务"><a href="#加载系统服务" class="headerlink" title="加载系统服务"></a>加载系统服务</h2><p>进入clash文件夹，将文件复制到相应位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd clash</span><br><span class="line">cp clash /usr/local/bin</span><br><span class="line">cp config.yaml /etc/clash/</span><br><span class="line">cp Country.mmdb /etc/clash/</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>sudo nano /etc/systemd/system/clash.service</code>新建服务，输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Clash Daemon</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">ExecStart=/usr/local/bin/clash -d /etc/clash/</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>systemctl enable clash</code>设置clash开机自启动</p>
+<p>使用<code>systemctl start clash</code>开启clash</p>
+<p>使用<code>systemctl restart clash</code>重启clash</p>
+<p>使用<code>systemctl stop clash</code>关闭clash</p>
+<p>使用<code>systemctl status clash</code>查看服务运行状况</p>
+<p>使用<code>systemctl list-units --type=service</code>查看当前正在运行的服务</p>
+<p><strong>关联文档：</strong><br>上一篇：[[Linux·[2]Linux常用软件安装]]<br>下一篇：[[Linux·[4]在Ubuntu上部署QT6开发环境]]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/Linux%C2%B7[3]Linux%E4%B8%8B%E9%85%8D%E7%BD%AEclash/" data-id="cl9htoe76000c44wq9ij5a9s2" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/21/Linux%C2%B7%5B4%5D%E5%9C%A8Ubuntu%E4%B8%8A%E9%83%A8%E7%BD%B2QT6%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/10/21/README/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.1%5DLinux%E4%B8%8B%E9%83%A8%E7%BD%B2%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.2%5D%E7%AC%94%E8%AE%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.3%5DDSP%E5%8A%9F%E8%83%BD/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/WordPress%C2%B7%5B1%5D%E5%9C%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E4%B8%8A%E9%83%A8%E7%BD%B2WordPress%20I/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/WordPress%C2%B7%5B3%5D%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E9%83%A8%E7%BD%B2WordPress/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

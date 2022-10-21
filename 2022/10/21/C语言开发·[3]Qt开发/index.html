@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Qt开发随手记new与变量new分配的内存在堆（heap）或自由存储区（free store）中；变量存储在栈（stack）中 多线程 继承QThread的run方法 继承QObject，将耗时操作放置在槽函数中，使用MoveToThread将对象移动至线程中 继承QRunnable与QObject，使用全局线程池管理线程。线程池简化了创建线程和销毁线程的时间，针对密集型任务有优化作用，针对运行时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/10/21/C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%C2%B7[3]Qt%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Qt开发随手记new与变量new分配的内存在堆（heap）或自由存储区（free store）中；变量存储在栈（stack）中 多线程 继承QThread的run方法 继承QObject，将耗时操作放置在槽函数中，使用MoveToThread将对象移动至线程中 继承QRunnable与QObject，使用全局线程池管理线程。线程池简化了创建线程和销毁线程的时间，针对密集型任务有优化作用，针对运行时">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-21T01:37:26.499Z">
+<meta property="article:modified_time" content="2022-10-11T05:27:30.287Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-C语言开发·[3]Qt开发" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%C2%B7%5B3%5DQt%E5%BC%80%E5%8F%91/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.499Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Qt开发随手记"><a href="#Qt开发随手记" class="headerlink" title="Qt开发随手记"></a>Qt开发随手记</h1><h2 id="new与变量"><a href="#new与变量" class="headerlink" title="new与变量"></a>new与变量</h2><p>new分配的内存在堆（heap）或自由存储区（free store）中；变量存储在栈（stack）中</p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><ol>
+<li>继承QThread的run方法</li>
+<li>继承QObject，将耗时操作放置在槽函数中，使用MoveToThread将对象移动至线程中</li>
+<li>继承QRunnable与QObject，使用全局线程池管理线程。线程池简化了创建线程和销毁线程的时间，针对密集型任务有优化作用，针对运行时间较长的任务优化作用不明显。</li>
+</ol>
+<h3 id="线程间通信"><a href="#线程间通信" class="headerlink" title="线程间通信"></a>线程间通信</h3><p>子线程1：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">signals:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">mysignal1</span><span class="params">()</span></span>; <span class="comment">// 信号只需要声明，不需要实现</span></span><br></pre></td></tr></table></figure>
+
+<p>子线程2：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">signalreceiver</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">signalreceiver</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;Received.&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 槽函数需要声明与实现</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">connect</span>(thread1, &amp;thread1::mysignal1, thread2, &amp;thread2::signalreceiver);</span><br><span class="line"><span class="comment">// 将thread的信号绑定在thread2的槽函数上，实现线程间通信</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h2><p>现代操作系统中，一般都提供了原子操作来实现一些同步操作，所谓原子操作，也就是一个独立而不可分割的操作。在单核环境中，一般的意义下原子操作中线程不会被切换，线程切换要么在原子操作之前，要么在原子操作完成之后。更广泛的意义下原子操作是指一系列必须整体完成的操作步骤，如果任何一步操作没有完成，那么所有完成的步骤都必须回滚，这样就可以保证要么所有操作步骤都未完成，要么所有操作步骤都被完成。</p>
+<p>例如在单核系统里，单个的机器指令可以看成是原子操作（如果有编译器优化、乱序执行等情况除外）；在多核系统中，单个的机器指令就不是原子操作，因为多核系统里是多指令流并行运行的，一个核在执行一个指令时，其他核同时执行的指令有可能操作同一块内存区域，从而出现数据竞争现象。多核系统中的原子操作通常使用内存栅障（memory barrier）来实现，即一个CPU核在执行原子操作时，其他CPU核必须停止对内存操作或者不对指定的内存进行操作，这样才能避免数据竞争问题。</p>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p>终端执行目录下的文件优先级高于环境变量</p>
+<h2 id="QLabel变形"><a href="#QLabel变形" class="headerlink" title="QLabel变形"></a>QLabel变形</h2><p>布局中QLabel显示图片后大小改变的问题</p>
+<p>设置label拉伸策略，<code>setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);</code></p>
+<h2 id="malloc与calloc的区别"><a href="#malloc与calloc的区别" class="headerlink" title="malloc与calloc的区别"></a>malloc与calloc的区别</h2><p>函数原型：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">calloc</span>(<span class="type">size_t</span> _NumOfElements,<span class="type">size_t</span> _SizeOfElements);</span><br><span class="line"></span><br><span class="line"><span class="built_in">malloc</span>(<span class="type">size_t</span> _Size);</span><br></pre></td></tr></table></figure>
+
+<p>calloc分配n块指定大小的内存；malloc分配指定大小的内存</p>
+<p>calloc在分配内存后将<strong>自动初始化内存空间</strong>，将数据清零；malloc在分配内存后不初始化，内存中为垃圾数据</p>
+<h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">void</span> (*handler)(<span class="type">void</span> *) = <span class="literal">nullptr</span>;</span><br></pre></td></tr></table></figure>
+
+<p>声明一个名为handler的指针，该指针指向一个返回值为void的函数，该函数的参数是<code>void*</code>，意为任意类型的指针</p>
+<h2 id="static修饰符"><a href="#static修饰符" class="headerlink" title="static修饰符"></a>static修饰符</h2><h3 id="用在局部变量前："><a href="#用在局部变量前：" class="headerlink" title="用在局部变量前："></a>用在局部变量前：</h3><ol>
+<li>该变量在全局数据区(静态区)分配内存（局部变量在栈区分配内存）</li>
+<li>没有显式初始化时被自动初始化为0</li>
+<li>只初始化一次，可以将值保存至下一次函数调用时，而访问范围限定在函数内，不被其他地方访问到（局部变量在栈区，在函数结束后立即释放内存，所以局部变量在每次函数调用时都会被初始化）</li>
+</ol>
+<h2 id="信号与槽绑定"><a href="#信号与槽绑定" class="headerlink" title="信号与槽绑定"></a>信号与槽绑定</h2><p>QT4风格：</p>
+<p>connect(&amp;subw,SIGNAL(mySignal()),this,SLOT(changeSubWindow()));</p>
+<p>QT5风格：</p>
+<p>connect(thread1, &amp;MyThread::sendSignal, thread2, &amp;MyThread::receiveSignal);</p>
+<h2 id="布局中QLabel显示图片后大小改变的问题"><a href="#布局中QLabel显示图片后大小改变的问题" class="headerlink" title="布局中QLabel显示图片后大小改变的问题"></a>布局中QLabel显示图片后大小改变的问题</h2><p>setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);</p>
+<h2 id="new加括号与不加括号"><a href="#new加括号与不加括号" class="headerlink" title="new加括号与不加括号"></a>new加括号与不加括号</h2><p>加括号：调用默认构造函数</p>
+<p>不加括号：不调用构造函数</p>
+<p>Example：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *p1 = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">10</span>];   <span class="comment">//内存中为垃圾数据</span></span><br><span class="line">Int *p2 = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">10</span>]();  <span class="comment">//内存中数据被清零</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="do-while-0-的作用"><a href="#do-while-0-的作用" class="headerlink" title="do while(0){}的作用"></a>do while(0){}的作用</h2><p>包裹代码，用于宏定义处</p>
+<h2 id="C-的内联函数"><a href="#C-的内联函数" class="headerlink" title="C++的内联函数"></a>C++的内联函数</h2><p>普通函数在调用时，需要将断点处的现场进行保护，跳转至函数内存地址；内联函数在编译时直接将函数语句在调用处展开，省去了跳转的操作，效率更高，但是多次调用内联函数将会多次展开，空间占用提高。</p>
+<p>在.h文件中直接实现函数，编译器将默认该函数为内联函数；在函数声明或实现前加inline关键字也可将函数指定为内联函数；编译器发现函数体过长或存在递归时，将不接受内联提议，按照普通的函数规则编译。</p>
+<h2 id="NULL与nullptr"><a href="#NULL与nullptr" class="headerlink" title="NULL与nullptr"></a>NULL与nullptr</h2><p>在C语言中，NULL被<strong>宏定义</strong>为<code>#define NULL ((void *)0)</code>，即NULL在代替空指针可表示空指针的意思或0，这样就出现了二义性，在一些问题的出现上不易被发现，也不符合程序思想。<br>为解决NULL代指空指针存在的二义性问题。在C++11推出的nullptr这特一新<strong>关键字</strong>代替空指针，很好解决的上述出现的问题。即nullptr指向即为空指针，不存在二义性</p>
+<p><strong>关联文档：</strong><br>上一篇：[[C语言开发·[2]Char的那些事]]<br>下一篇：无</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%C2%B7[3]Qt%E5%BC%80%E5%8F%91/" data-id="cl9htoe70000444wq4atv0gpb" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/21/C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%C2%B7%5B3.1%5DQSS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/10/21/ESP32%E5%BC%80%E5%8F%91%C2%B7%5B1.2%5D%E5%AE%89%E8%A3%85VSCode%E6%8F%92%E4%BB%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.1%5DLinux%E4%B8%8B%E9%83%A8%E7%BD%B2%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.2%5D%E7%AC%94%E8%AE%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.3%5DDSP%E5%8A%9F%E8%83%BD/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/WordPress%C2%B7%5B1%5D%E5%9C%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E4%B8%8A%E9%83%A8%E7%BD%B2WordPress%20I/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/WordPress%C2%B7%5B3%5D%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E9%83%A8%E7%BD%B2WordPress/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

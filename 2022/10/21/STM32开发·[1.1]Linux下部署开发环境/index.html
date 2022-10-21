@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="STM32开发笔记（零）Linux下部署开发环境修改时间：2021.06016 22:27 使用环境：Ubuntu 20.04 CLion 安装依赖环境获取arm-gcc在GNU Toolchain下载二进制文件，保存在&#x2F;home&#x2F;user&#x2F;gcc-arm文件夹下，修改&#x2F;etc&#x2F;profile文件，在末尾添加export PATH＝$PATH:&#x2F;home&#x2F;user&#x2F;bin，执行source &#x2F;et">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7[1.1]Linux%E4%B8%8B%E9%83%A8%E7%BD%B2%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="STM32开发笔记（零）Linux下部署开发环境修改时间：2021.06016 22:27 使用环境：Ubuntu 20.04 CLion 安装依赖环境获取arm-gcc在GNU Toolchain下载二进制文件，保存在&#x2F;home&#x2F;user&#x2F;gcc-arm文件夹下，修改&#x2F;etc&#x2F;profile文件，在末尾添加export PATH＝$PATH:&#x2F;home&#x2F;user&#x2F;bin，执行source &#x2F;et">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-21T01:37:26.514Z">
+<meta property="article:modified_time" content="2022-08-10T03:43:35.616Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-STM32开发·[1.1]Linux下部署开发环境" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.1%5DLinux%E4%B8%8B%E9%83%A8%E7%BD%B2%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.514Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="STM32开发笔记（零）Linux下部署开发环境"><a href="#STM32开发笔记（零）Linux下部署开发环境" class="headerlink" title="STM32开发笔记（零）Linux下部署开发环境"></a>STM32开发笔记（零）Linux下部署开发环境</h1><p>修改时间：2021.06016 22:27</p>
+<p>使用环境：Ubuntu 20.04 CLion</p>
+<h2 id="安装依赖环境"><a href="#安装依赖环境" class="headerlink" title="安装依赖环境"></a>安装依赖环境</h2><h3 id="获取arm-gcc"><a href="#获取arm-gcc" class="headerlink" title="获取arm-gcc"></a>获取arm-gcc</h3><p>在<a target="_blank" rel="noopener" href="https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads">GNU Toolchain</a>下载二进制文件，保存在<code>/home/user/gcc-arm</code>文件夹下，修改<code>/etc/profile</code>文件，在末尾添加<code>export PATH＝$PATH:/home/user/bin</code>，执行<code>source /etc/profile</code>刷新环境变量。</p>
+<h3 id="获取OpenOCD"><a href="#获取OpenOCD" class="headerlink" title="获取OpenOCD"></a>获取OpenOCD</h3><p>在Debian环境下，可直接执行<code>sudo apt install openocd</code>安装Openocd，但其版本为0.10.0，存在某些问题。</p>
+<p>官网下载OpenOCD源码包，解压至<code>/home/user/OpenOCD</code>，命令行输入<code>./configure</code>检查编译前环境，输入<code>make -j8</code>开始编译，成功编译后输入<code>sudo make install</code>安装。</p>
+<h3 id="获取STM32CubeMX"><a href="#获取STM32CubeMX" class="headerlink" title="获取STM32CubeMX"></a>获取STM32CubeMX</h3><p><a target="_blank" rel="noopener" href="https://www.st.com/zh/development-tools/stm32cubemx.html">STM32CubeMX</a>下载解压安装即可。</p>
+<h2 id="配置Clion"><a href="#配置Clion" class="headerlink" title="配置Clion"></a>配置Clion</h2><h3 id="配置嵌入式开发工具链"><a href="#配置嵌入式开发工具链" class="headerlink" title="配置嵌入式开发工具链"></a>配置嵌入式开发工具链</h3><p>设置中将OpenOCD与STM32CubeMX的目录正确设置</p>
+<h3 id="配置项目"><a href="#配置项目" class="headerlink" title="配置项目"></a>配置项目</h3><p>在OpenOCD中选择正确的.cfg文件，进行CMake扫描后，点击编译即可。编译结束后可使用JLink、STLink、DAP等调试器进行烧录。</p>
+<h2 id="备忘"><a href="#备忘" class="headerlink" title="备忘"></a>备忘</h2><p>使用OpenOCD0.10.0时工程目录里不要有空格</p>
+<p><strong>关联文档：</strong><br>上一篇：无<br>下一篇：[[STM32开发·[1.2]笔记]]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7[1.1]Linux%E4%B8%8B%E9%83%A8%E7%BD%B2%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" data-id="cl9htoe76000d44wq6i6tdn4u" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.2%5D%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.1%5DLinux%E4%B8%8B%E9%83%A8%E7%BD%B2%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.2%5D%E7%AC%94%E8%AE%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.3%5DDSP%E5%8A%9F%E8%83%BD/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/WordPress%C2%B7%5B1%5D%E5%9C%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E4%B8%8A%E9%83%A8%E7%BD%B2WordPress%20I/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/WordPress%C2%B7%5B3%5D%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E9%83%A8%E7%BD%B2WordPress/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

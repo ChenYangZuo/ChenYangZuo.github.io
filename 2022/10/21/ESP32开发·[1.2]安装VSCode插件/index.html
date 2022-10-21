@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="ESP32开发笔记（二）安装VSCode插件修改时间：2021.05.17 17:16 使用环境：VirtualBox+Ubuntu20.04 安装VSCode插件在插件中搜索espressif，选择ESpressif IDF安装 在命令面板运行ESP-IDF: Configure ESP-IDF extension进入欢迎界面 选择USE EXISTING SETUP，插件自动导入已安装的ESP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/10/21/ESP32%E5%BC%80%E5%8F%91%C2%B7[1.2]%E5%AE%89%E8%A3%85VSCode%E6%8F%92%E4%BB%B6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ESP32开发笔记（二）安装VSCode插件修改时间：2021.05.17 17:16 使用环境：VirtualBox+Ubuntu20.04 安装VSCode插件在插件中搜索espressif，选择ESpressif IDF安装 在命令面板运行ESP-IDF: Configure ESP-IDF extension进入欢迎界面 选择USE EXISTING SETUP，插件自动导入已安装的ESP">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-21T01:37:26.499Z">
+<meta property="article:modified_time" content="2022-08-10T03:46:12.729Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ESP32开发·[1.2]安装VSCode插件" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/21/ESP32%E5%BC%80%E5%8F%91%C2%B7%5B1.2%5D%E5%AE%89%E8%A3%85VSCode%E6%8F%92%E4%BB%B6/" class="article-date">
+  <time class="dt-published" datetime="2022-10-21T01:37:26.499Z" itemprop="datePublished">2022-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="ESP32开发笔记（二）安装VSCode插件"><a href="#ESP32开发笔记（二）安装VSCode插件" class="headerlink" title="ESP32开发笔记（二）安装VSCode插件"></a>ESP32开发笔记（二）安装VSCode插件</h1><p>修改时间：2021.05.17 17:16</p>
+<p>使用环境：VirtualBox+Ubuntu20.04</p>
+<h2 id="安装VSCode插件"><a href="#安装VSCode插件" class="headerlink" title="安装VSCode插件"></a>安装VSCode插件</h2><p>在插件中搜索<strong>espressif</strong>，选择<strong>ESpressif IDF</strong>安装</p>
+<p>在命令面板运行<code>ESP-IDF: Configure ESP-IDF extension</code>进入欢迎界面</p>
+<p>选择<strong>USE EXISTING SETUP</strong>，插件自动导入已安装的ESP-IDF</p>
+<h2 id="第二个工程"><a href="#第二个工程" class="headerlink" title="第二个工程"></a>第二个工程</h2><h3 id="创建工程"><a href="#创建工程" class="headerlink" title="创建工程"></a>创建工程</h3><p>在命令面板运行<code>ESP-IDF: Show Examples Projects</code>显示例程</p>
+<p>选择get-started中的blink点灯例程，在右侧点击生成</p>
+<h3 id="配置工程"><a href="#配置工程" class="headerlink" title="配置工程"></a>配置工程</h3><p>在命令面板运行<code>ESP-IDF: Set Espressif device target</code>选择开发芯片，这里选择默认<strong>ESP32</strong></p>
+<p>在命令面板运行<code>ESP-IDF: SDK Configuration editor</code>配置SDK选项，这里保持默认</p>
+<h3 id="编译工程"><a href="#编译工程" class="headerlink" title="编译工程"></a>编译工程</h3><p>在命令面板运行<code>ESP-IDF: Build your project</code>开始编译</p>
+<p>在命令面板运行<code>ESP-IDF: Size analysis of the binaries</code>查看编译的二进制文件信息</p>
+<h3 id="烧录"><a href="#烧录" class="headerlink" title="烧录"></a>烧录</h3><p>在命令面板运行<code>ESP-IDF: Select port to use</code>选择开发板使用的串口</p>
+<p>若出现无法访问的问题，可在命令行输入<code>chmod 777 /dev/ttyUSB0</code>提权</p>
+<p>在命令面板运行<code>ESP-IDF: Flash your project</code>开始刷写</p>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><p>在命令面板运行<code>ESP-IDF: Monitor your device</code>查看调试信息</p>
+<p><strong>关联文档：</strong><br>上一篇：[[ESP32开发·[1.1]Linux下部署ESP-IDF开发环境]]<br>下一篇：无</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/21/ESP32%E5%BC%80%E5%8F%91%C2%B7[1.2]%E5%AE%89%E8%A3%85VSCode%E6%8F%92%E4%BB%B6/" data-id="cl9htoe71000544wqa0bv1bkl" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/21/C%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%C2%B7%5B3%5DQt%E5%BC%80%E5%8F%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/10/21/FPGA%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.1%5DLinux%E4%B8%8B%E9%83%A8%E7%BD%B2%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.2%5D%E7%AC%94%E8%AE%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/STM32%E5%BC%80%E5%8F%91%C2%B7%5B1.3%5DDSP%E5%8A%9F%E8%83%BD/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/WordPress%C2%B7%5B1%5D%E5%9C%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E4%B8%8A%E9%83%A8%E7%BD%B2WordPress%20I/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/21/WordPress%C2%B7%5B3%5D%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E9%83%A8%E7%BD%B2WordPress/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
