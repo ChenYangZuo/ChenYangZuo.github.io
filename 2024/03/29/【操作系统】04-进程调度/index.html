@@ -19,28 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="【操作系统】01-操作系统介绍程序运行的过程：获取指令（fetch）、解码（decode）、执行（execute） 每个 CPU、内存和磁盘都是系统的资源（resource）， 因此操作系统扮演的主要角色就是管理（manage）这些资源 虚拟CPU将单个CPU（或其中一小部分）转换为看似无限数量的CPU，从而让许多程序看似同时运行，这就是所谓的虚拟化CPU 虚拟化内存要读取（read）内存，必须指">
+    <meta name="description" content="【操作系统】04-进程调度调度指标周转时间$T_{周转时间}&#x3D;T_{完成时间}-T_{到达时间}$ 周转时间是一个性能（performance）指标，另一个有趣的指标是公平（fairness），性能和公平在调度系统中往往是矛盾的。 响应时间$T_{响应时间}&#x3D;T_{首次运行}-T_{到达时间}$ 先进先出很简单，而且易于实现 一些耗时较少的潜在资源消费者被排在重量级的资源消费者">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【操作系统】01-操作系统介绍">
-<meta property="og:url" content="http://example.com/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9101-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:title" content="【操作系统】04-进程调度">
+<meta property="og:url" content="http://example.com/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9104-%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6/index.html">
 <meta property="og:site_name" content="ZZZCY的编程小站">
-<meta property="og:description" content="【操作系统】01-操作系统介绍程序运行的过程：获取指令（fetch）、解码（decode）、执行（execute） 每个 CPU、内存和磁盘都是系统的资源（resource）， 因此操作系统扮演的主要角色就是管理（manage）这些资源 虚拟CPU将单个CPU（或其中一小部分）转换为看似无限数量的CPU，从而让许多程序看似同时运行，这就是所谓的虚拟化CPU 虚拟化内存要读取（read）内存，必须指">
+<meta property="og:description" content="【操作系统】04-进程调度调度指标周转时间$T_{周转时间}&#x3D;T_{完成时间}-T_{到达时间}$ 周转时间是一个性能（performance）指标，另一个有趣的指标是公平（fairness），性能和公平在调度系统中往往是矛盾的。 响应时间$T_{响应时间}&#x3D;T_{首次运行}-T_{到达时间}$ 先进先出很简单，而且易于实现 一些耗时较少的潜在资源消费者被排在重量级的资源消费者">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-28T16:04:16.000Z">
-<meta property="article:modified_time" content="2024-03-28T16:05:57.605Z">
+<meta property="article:published_time" content="2024-03-28T16:28:03.000Z">
+<meta property="article:modified_time" content="2024-03-28T16:31:56.417Z">
 <meta property="article:author" content="ZZZCY">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9101-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/">
+<link rel="canonical" href="http://example.com/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9104-%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9101-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/","path":"2024/03/29/【操作系统】01-操作系统介绍/","title":"【操作系统】01-操作系统介绍"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9104-%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6/","path":"2024/03/29/【操作系统】04-进程调度/","title":"【操作系统】04-进程调度"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>【操作系统】01-操作系统介绍 | ZZZCY的编程小站</title>
+<title>【操作系统】04-进程调度 | ZZZCY的编程小站</title>
   
 
 
@@ -112,7 +112,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9101-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">【操作系统】01-操作系统介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9FCPU"><span class="nav-number">1.1.</span> <span class="nav-text">虚拟CPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96%E5%86%85%E5%AD%98"><span class="nav-number">1.2.</span> <span class="nav-text">虚拟化内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91"><span class="nav-number">1.3.</span> <span class="nav-text">并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">持久性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87"><span class="nav-number">1.5.</span> <span class="nav-text">设计目标</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9104-%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6"><span class="nav-number">1.</span> <span class="nav-text">【操作系统】04-进程调度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6%E6%8C%87%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">调度指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%A8%E8%BD%AC%E6%97%B6%E9%97%B4"><span class="nav-number">1.1.1.</span> <span class="nav-text">周转时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E6%97%B6%E9%97%B4"><span class="nav-number">1.1.2.</span> <span class="nav-text">响应时间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E8%BF%9B%E5%85%88%E5%87%BA"><span class="nav-number">1.2.</span> <span class="nav-text">先进先出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88SJF"><span class="nav-number">1.3.</span> <span class="nav-text">最短任务优先SJF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E5%AE%8C%E6%88%90%E6%97%B6%E9%97%B4%E4%BC%98%E5%85%88STCF"><span class="nav-number">1.4.</span> <span class="nav-text">最短完成时间优先STCF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AE%E8%BD%ACRound-Robin"><span class="nav-number">1.5.</span> <span class="nav-text">轮转Round-Robin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E5%90%88I-O"><span class="nav-number">1.6.</span> <span class="nav-text">结合I&#x2F;O</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -158,7 +158,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9101-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9104-%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -171,12 +171,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="【操作系统】01-操作系统介绍 | ZZZCY的编程小站">
+      <meta itemprop="name" content="【操作系统】04-进程调度 | ZZZCY的编程小站">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          【操作系统】01-操作系统介绍
+          【操作系统】04-进程调度
         </h1>
 
         <div class="post-meta-container">
@@ -188,7 +188,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-03-29 00:04:16 / 修改时间：00:05:57" itemprop="dateCreated datePublished" datetime="2024-03-29T00:04:16+08:00">2024-03-29</time>
+      <time title="创建时间：2024-03-29 00:28:03 / 修改时间：00:31:56" itemprop="dateCreated datePublished" datetime="2024-03-29T00:28:03+08:00">2024-03-29</time>
     </span>
 
   
@@ -200,21 +200,21 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="【操作系统】01-操作系统介绍"><a href="#【操作系统】01-操作系统介绍" class="headerlink" title="【操作系统】01-操作系统介绍"></a>【操作系统】01-操作系统介绍</h1><p>程序运行的过程：获取指令（fetch）、解码（decode）、执行（execute）</p>
-<p>每个 CPU、内存和磁盘都是系统的资源（resource）， 因此操作系统扮演的主要角色就是管理（manage）这些资源</p>
-<h2 id="虚拟CPU"><a href="#虚拟CPU" class="headerlink" title="虚拟CPU"></a>虚拟CPU</h2><p>将单个CPU（或其中一小部分）转换为看似无限数量的CPU，从而让许多程序看似同时运行，这就是所谓的虚拟化CPU</p>
-<h2 id="虚拟化内存"><a href="#虚拟化内存" class="headerlink" title="虚拟化内存"></a>虚拟化内存</h2><p>要读取（read）内存，必须指定一个地址（address），才能访问存储在那里的数据。要写入（write）或更新（update）内存，还必须指定要写入给定地址的数据</p>
-<p>每个正在运行的程序都有自己的私有内存，而不是与其他正在运行的程序共享相同的物理内存</p>
-<p>每个进程访问自己的私有虚拟地址空间（virtual address space），操作系统以某种方式映射到机器的物理内存上。一个正在运行的程序中的内存引用不会影响其他进程（或操作系统本身）的地址空间</p>
-<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><p>我们使用这个术语来指现一系列问题，这些问题在同时（并发地）处理很多事情时出现且必须解决。并发问题首先出现在操作系统本身中。遗憾的是，并发问题不再局限于操作系统本身。事实上，现现多线程（multi-threaded）程序也存在相同的问题</p>
-<h2 id="持久性"><a href="#持久性" class="headerlink" title="持久性"></a>持久性</h2><p>我们需要硬件和软件来持久地（persistently）存储数据</p>
-<p>不像操作系统为CPU 和内存提供的抽象，操作系统不会为每个应用程序创建专用的虚拟磁盘</p>
-<p>操作系统提供了一种通过系统调用来访问设备的标准和简单的方法。因此，OS 有时被视为标准库（standard library）</p>
-<h2 id="设计目标"><a href="#设计目标" class="headerlink" title="设计目标"></a>设计目标</h2><p>建立抽象</p>
-<p>提供高性能，最小化系统开销</p>
-<p>在程序与程序间、程序与系统间提供隔离保护</p>
-<p>提供高可靠性</p>
-<p>能源效率、安全性、移动性</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="【操作系统】04-进程调度"><a href="#【操作系统】04-进程调度" class="headerlink" title="【操作系统】04-进程调度"></a>【操作系统】04-进程调度</h1><h2 id="调度指标"><a href="#调度指标" class="headerlink" title="调度指标"></a>调度指标</h2><h3 id="周转时间"><a href="#周转时间" class="headerlink" title="周转时间"></a>周转时间</h3><p>$T_{周转时间}&#x3D;T_{完成时间}-T_{到达时间}$</p>
+<p>周转时间是一个性能（performance）指标，另一个有趣的指标是公平（fairness），性能和公平在调度系统中往往是矛盾的。</p>
+<h3 id="响应时间"><a href="#响应时间" class="headerlink" title="响应时间"></a>响应时间</h3><p>$T_{响应时间}&#x3D;T_{首次运行}-T_{到达时间}$</p>
+<h2 id="先进先出"><a href="#先进先出" class="headerlink" title="先进先出"></a>先进先出</h2><p>很简单，而且易于实现</p>
+<p>一些耗时较少的潜在资源消费者被排在重量级的资源消费者之后（护航效应）时性能较差</p>
+<h2 id="最短任务优先SJF"><a href="#最短任务优先SJF" class="headerlink" title="最短任务优先SJF"></a>最短任务优先SJF</h2><p>先运行最短的任务，然后是次短的任务</p>
+<p>考虑到所有工作同时到达的假设，我们可以证明SJF确实是一个最优（optimal）调度算法。</p>
+<h2 id="最短完成时间优先STCF"><a href="#最短完成时间优先STCF" class="headerlink" title="最短完成时间优先STCF"></a>最短完成时间优先STCF</h2><p>向SJF添加<strong>抢占</strong>，每当新工作进入系统时，它就会确定剩余工作和新工作中，谁的剩余时间最少，然后调度该工作。</p>
+<h2 id="轮转Round-Robin"><a href="#轮转Round-Robin" class="headerlink" title="轮转Round-Robin"></a>轮转Round-Robin</h2><p>RR在一个时间片内运行一个工作，然后切换到运行队列中的下一个任务</p>
+<p>时间片长度必须是时钟中断周期的倍数</p>
+<p>权衡时间片的长度，使其足够长，以便摊销（amortize）上下文切换成本</p>
+<p>上下文切换的成本不仅仅来自保存和恢复少量寄存器的操作系统操作。程序运行时，它们在CPU 高要缓存、TLB、分支预测器和其他片上硬件中建立了大量的状态。切换到另一个工作会导致此状态被刷新，且与当前运行的作业相关的新状态被引入，这可能导致显著的性能成本</p>
+<p>我们开发了两种调度程序。第一种类型（SJF、STCF）优化周转时间，但对响应时间不利。第二种类型（RR）优化响应时间，但对周转时间不利。</p>
+<h2 id="结合I-O"><a href="#结合I-O" class="headerlink" title="结合I&#x2F;O"></a>结合I&#x2F;O</h2><p>调度程序要在工作发起I&#x2F;O请求时做出决定，在CPU上安排另一项工作</p>
+<p>调度程序要在I&#x2F;O完成时做出决定，产生中断，操作系统运行并将发出I&#x2F;O的进程从阻塞状态移回就绪状态</p>
 
     </div>
 
@@ -231,13 +231,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/03/28/hello-world/" rel="prev" title="Hello World">
-                  <i class="fa fa-angle-left"></i> Hello World
+                <a href="/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9103-%E5%8F%97%E9%99%90%E7%9B%B4%E6%8E%A5%E6%89%A7%E8%A1%8C/" rel="prev" title="【操作系统】03-受限直接执行">
+                  <i class="fa fa-angle-left"></i> 【操作系统】03-受限直接执行
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9102-%E8%BF%9B%E7%A8%8B/" rel="next" title="【操作系统】02-进程">
-                  【操作系统】02-进程 <i class="fa fa-angle-right"></i>
+                <a href="/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9105-%E5%A4%9A%E7%BA%A7%E5%8F%8D%E9%A6%88%E9%98%9F%E5%88%97MLFQ/" rel="next" title="【操作系统】05-多级反馈队列MLFQ">
+                  【操作系统】05-多级反馈队列MLFQ <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
