@@ -82,7 +82,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">1</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a></li>
   </ul>
 </nav>
 
@@ -119,13 +119,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -151,7 +151,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/28/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/29/%E3%80%90SQL%E3%80%9107-%E5%88%86%E7%BB%84%E6%95%B0%E6%8D%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/28/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+          <a href="/2024/03/29/%E3%80%90SQL%E3%80%9107-%E5%88%86%E7%BB%84%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">【SQL】07-分组数据</a>
         </h2>
 
         <div class="post-meta-container">
@@ -179,8 +179,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2024-03-28 23:46:31" itemprop="dateCreated datePublished" datetime="2024-03-28T23:46:31+08:00">2024-03-28</time>
+      <time title="创建时间：2024-03-29 14:45:41 / 修改时间：14:54:22" itemprop="dateCreated datePublished" datetime="2024-03-29T14:45:41+08:00">2024-03-29</time>
     </span>
 
   
@@ -193,19 +194,930 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+          <h1 id="【SQL】07-分组数据"><a href="#【SQL】07-分组数据" class="headerlink" title="【SQL】07-分组数据"></a>【SQL】07-分组数据</h1><h2 id="创建分组"><a href="#创建分组" class="headerlink" title="创建分组"></a>创建分组</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_id, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> num_prods</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> vend_id;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>GROUP BY子句必须出现在WHERE子句之后，ORDER BY子句之前</p>
+<h2 id="过滤分组"><a href="#过滤分组" class="headerlink" title="过滤分组"></a>过滤分组</h2><p><code>WHERE</code>过滤指定的是行而不是分组；<code>HAVING</code>可以过滤分组，所有类型的<code>WHERE</code>子句都可以用<code>HAVING</code>来替代</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cust_id, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> orders</span><br><span class="line"><span class="keyword">FROM</span> Orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> cust_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;=</span> <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p><code>WHERE</code>在数据分组前进行过滤，<code>HAVING</code>在数据分组后进行过滤，<code>WHERE</code>排除的行不在分组内，可能改变计算值</p>
+<h2 id="SELECT子句顺序"><a href="#SELECT子句顺序" class="headerlink" title="SELECT子句顺序"></a>SELECT子句顺序</h2><table>
+<thead>
+<tr>
+<th>子句</th>
+<th>说明</th>
+<th>必须使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SELECT</td>
+<td>返回数据</td>
+<td>是</td>
+</tr>
+<tr>
+<td>FROM</td>
+<td>从中检索数据的表</td>
+<td>仅在从表选择数据时使用</td>
+</tr>
+<tr>
+<td>WHERE</td>
+<td>行级过滤</td>
+<td>否</td>
+</tr>
+<tr>
+<td>GROUP BY</td>
+<td>分组说明</td>
+<td>仅在按组计算聚集时使用</td>
+</tr>
+<tr>
+<td>HAVING</td>
+<td>组级过滤</td>
+<td>否</td>
+</tr>
+<tr>
+<td>ORDER BY</td>
+<td>输出排序顺序</td>
+<td>否</td>
+</tr>
+</tbody></table>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+      
+    </div>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/29/%E3%80%90SQL%E3%80%9106-%E6%B1%87%E6%80%BB%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZZZCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/29/%E3%80%90SQL%E3%80%9106-%E6%B1%87%E6%80%BB%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">【SQL】06-汇总数据</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-29 14:45:31 / 修改时间：14:54:19" itemprop="dateCreated datePublished" datetime="2024-03-29T14:45:31+08:00">2024-03-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="【SQL】06-汇总数据"><a href="#【SQL】06-汇总数据" class="headerlink" title="【SQL】06-汇总数据"></a>【SQL】06-汇总数据</h1><h2 id="聚集函数"><a href="#聚集函数" class="headerlink" title="聚集函数"></a>聚集函数</h2><p>我们经常需要汇总数据而不用把它们实际检索出来，为此SQL提供了专门的函数。</p>
+<h3 id="AVG-函数"><a href="#AVG-函数" class="headerlink" title="AVG()函数"></a>AVG()函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(prod_price) <span class="keyword">AS</span> avg_price</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id <span class="operator">=</span> <span class="string">&#x27;DLL01&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>AVG()只能用来确定特定数值列的平均值，而且列名必须作为函数参数给出。为了获得多个列的平均值，必须使用多个AVG()函数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(<span class="keyword">DISTINCT</span> prod_price) <span class="keyword">AS</span> avg_price</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id <span class="operator">=</span> <span class="string">&#x27;DLL01&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>确定<code>prod_price</code>列中不同的值的平均值</p>
+<h3 id="COUNT-函数"><a href="#COUNT-函数" class="headerlink" title="COUNT()函数"></a>COUNT()函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(cust_email) <span class="keyword">AS</span> num_cust</span><br><span class="line"><span class="keyword">FROM</span> Customers;</span><br></pre></td></tr></table></figure>
+
+<p>对<code>cust_email</code>中有值的行进行计数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> num_cust</span><br><span class="line"><span class="keyword">FROM</span> Customers;</span><br></pre></td></tr></table></figure>
+
+<p>对所有行计数，不管行中各列有什么值</p>
+<h3 id="MAX-函数"><a href="#MAX-函数" class="headerlink" title="MAX()函数"></a>MAX()函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MAX</span>(prod_price) <span class="keyword">AS</span> max_price</span><br><span class="line"><span class="keyword">FROM</span> Products;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MIN-函数"><a href="#MIN-函数" class="headerlink" title="MIN()函数"></a>MIN()函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MIN</span>(prod_price) <span class="keyword">AS</span> min_price</span><br><span class="line"><span class="keyword">FROM</span> Products;</span><br></pre></td></tr></table></figure>
+
+<h3 id="SUM-函数"><a href="#SUM-函数" class="headerlink" title="SUM()函数"></a>SUM()函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(quantity) <span class="keyword">AS</span> items_ordered</span><br><span class="line"><span class="keyword">FROM</span> OrderItems</span><br><span class="line"><span class="keyword">WHERE</span> order_num <span class="operator">=</span> <span class="number">20005</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="组合函数"><a href="#组合函数" class="headerlink" title="组合函数"></a>组合函数</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> num_items,</span><br><span class="line">    <span class="built_in">MIN</span>(prod_price) <span class="keyword">AS</span> price_min,</span><br><span class="line">    <span class="built_in">MAX</span>(prod_price) <span class="keyword">AS</span> price_max,</span><br><span class="line">    <span class="built_in">AVG</span>(prod_price) <span class="keyword">AS</span> price_avg</span><br><span class="line"><span class="keyword">FROM</span> Products;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/29/%E3%80%90SQL%E3%80%9105-%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZZZCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/29/%E3%80%90SQL%E3%80%9105-%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">【SQL】05-使用函数处理数据</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-29 14:45:23 / 修改时间：14:54:15" itemprop="dateCreated datePublished" datetime="2024-03-29T14:45:23+08:00">2024-03-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="【SQL】05-使用函数处理数据"><a href="#【SQL】05-使用函数处理数据" class="headerlink" title="【SQL】05-使用函数处理数据"></a>【SQL】05-使用函数处理数据</h1><h2 id="文本处理函数"><a href="#文本处理函数" class="headerlink" title="文本处理函数"></a>文本处理函数</h2><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LEFT()</td>
+<td>取字符串左边的字符</td>
+</tr>
+<tr>
+<td>LENGTH()</td>
+<td>取字符串长度</td>
+</tr>
+<tr>
+<td>LOWER()</td>
+<td>将字符串转换为小写</td>
+</tr>
+<tr>
+<td>LTRIM()</td>
+<td>去掉字符串左边的空格</td>
+</tr>
+<tr>
+<td>RIGHT()</td>
+<td>取字符串右边的字符</td>
+</tr>
+<tr>
+<td>RTRIM()</td>
+<td>去掉字符串右边的空格</td>
+</tr>
+<tr>
+<td>SUBSTR()</td>
+<td>提取字符串的组成部分</td>
+</tr>
+<tr>
+<td>UPPER()</td>
+<td>将字符串转换为大写</td>
+</tr>
+</tbody></table>
+<h2 id="日期和时间处理函数"><a href="#日期和时间处理函数" class="headerlink" title="日期和时间处理函数"></a>日期和时间处理函数</h2><p>日期和时间采用相应的数据类型存储在表中，每种DBMS都有自己的特殊形式。日期和时间值以特殊的格式存储，以便能快速和有效地排序或过滤，并且节省物理存储空间。</p>
+<h2 id="数值处理函数"><a href="#数值处理函数" class="headerlink" title="数值处理函数"></a>数值处理函数</h2><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ABS()</td>
+<td>绝对值</td>
+</tr>
+<tr>
+<td>COS()</td>
+<td>一个角度的余弦</td>
+</tr>
+<tr>
+<td>EXP()</td>
+<td>一个数的指数</td>
+</tr>
+<tr>
+<td>PI()</td>
+<td>返回圆周率</td>
+</tr>
+<tr>
+<td>SIN()</td>
+<td>一个角度的正弦</td>
+</tr>
+<tr>
+<td>SQRT()</td>
+<td>一个数的平方根</td>
+</tr>
+<tr>
+<td>TAN()</td>
+<td>一个角度的正切</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/29/%E3%80%90SQL%E3%80%9104-%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZZZCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/29/%E3%80%90SQL%E3%80%9104-%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5/" class="post-title-link" itemprop="url">【SQL】04-计算字段</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-29 14:45:16 / 修改时间：14:54:12" itemprop="dateCreated datePublished" datetime="2024-03-29T14:45:16+08:00">2024-03-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="【SQL】04-计算字段"><a href="#【SQL】04-计算字段" class="headerlink" title="【SQL】04-计算字段"></a>【SQL】04-计算字段</h1><h2 id="拼接字段"><a href="#拼接字段" class="headerlink" title="拼接字段"></a>拼接字段</h2><p>在MySQL和MariaDB中，必须使用特殊的函数<code>Concat</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Concat(vend_name, <span class="string">&#x27; (&#x27;</span>, vend_country, <span class="string">&#x27;)&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> Vendors</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> vend_name;</span><br></pre></td></tr></table></figure>
+
+<p>SELECT语句返回包含上述四个元素的一个列</p>
+<h3 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h3><p>RTRIM()函数去掉值右边的所有空格</p>
+<p>LTRIM()函数去掉字符串左边的空格</p>
+<p>TRIM()函数去掉字符串两边的空格</p>
+<h3 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Concat(RTrim(vend_name), <span class="string">&#x27; (&#x27;</span>, RTrim(vend_country), <span class="string">&#x27;)&#x27;</span>) <span class="keyword">AS</span> vend_title</span><br><span class="line"><span class="keyword">FROM</span> Vendors</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> vend_name;</span><br></pre></td></tr></table></figure>
+
+<p>指示SQL创建一个包含指定计算结果的名为vend_title的计算字段，任何客户端应用都可以按名称引用这个列</p>
+<h2 id="算术计算"><a href="#算术计算" class="headerlink" title="算术计算"></a>算术计算</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id,</span><br><span class="line">quantity,</span><br><span class="line">item_price,</span><br><span class="line">quantity<span class="operator">*</span>item_price <span class="keyword">AS</span> expanded_price</span><br><span class="line"><span class="keyword">FROM</span> OrderItems</span><br><span class="line"><span class="keyword">WHERE</span> order_num <span class="operator">=</span> <span class="number">20008</span>;</span><br></pre></td></tr></table></figure>
+
+<p>支持运算符：+ - * &#x2F;</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/29/%E3%80%90SQL%E3%80%9103-%E8%BF%87%E6%BB%A4%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZZZCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/29/%E3%80%90SQL%E3%80%9103-%E8%BF%87%E6%BB%A4%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">【SQL】03-过滤数据</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-29 14:45:08 / 修改时间：14:54:08" itemprop="dateCreated datePublished" datetime="2024-03-29T14:45:08+08:00">2024-03-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="【SQL】03-过滤数据"><a href="#【SQL】03-过滤数据" class="headerlink" title="【SQL】03-过滤数据"></a>【SQL】03-过滤数据</h1><h2 id="使用WHERE子句"><a href="#使用WHERE子句" class="headerlink" title="使用WHERE子句"></a>使用WHERE子句</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> prod_price<span class="operator">=</span><span class="number">3.49</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在同时使用ORDER BY和WHERE子句时，应该让ORDER BY位于WHERE之后，否则将会产生错误  </p>
+<h2 id="WHERE-子句操作符"><a href="#WHERE-子句操作符" class="headerlink" title="WHERE 子句操作符"></a>WHERE 子句操作符</h2><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x3D;</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>&lt;&gt; &#x2F; !&#x3D;</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>&lt;&#x3D;</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>!&lt;</td>
+<td>不小于</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>&gt;&#x3D;</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>!&gt;</td>
+<td>不大于</td>
+</tr>
+<tr>
+<td>BETWEEN</td>
+<td>在两个值之间</td>
+</tr>
+<tr>
+<td>IS NULL</td>
+<td>值为NULL</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> prod_price <span class="keyword">BETWEEN</span> <span class="number">5</span> <span class="keyword">AND</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cust_name</span><br><span class="line"><span class="keyword">FROM</span> Customers</span><br><span class="line"><span class="keyword">WHERE</span> cust_email <span class="keyword">IS</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="组合子句"><a href="#组合子句" class="headerlink" title="组合子句"></a>组合子句</h2><h3 id="AND"><a href="#AND" class="headerlink" title="AND"></a>AND</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id <span class="operator">=</span> <span class="string">&#x27;DLL01&#x27;</span> <span class="keyword">AND</span> prod_price <span class="operator">&lt;=</span> <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id <span class="operator">=</span> <span class="string">&#x27;DLL01&#x27;</span> <span class="keyword">OR</span> vend_id <span class="operator">=</span> <span class="string">&#x27;BRS01&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>SQL在处理OR操作符前，优先处理AND操作符  </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> (vend_id <span class="operator">=</span> <span class="string">&#x27;DLL01&#x27;</span> <span class="keyword">OR</span> vend_id <span class="operator">=</span> <span class="string">&#x27;BRS01&#x27;</span>)</span><br><span class="line">	<span class="keyword">AND</span> prod_price <span class="operator">&gt;=</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="IN操作符"><a href="#IN操作符" class="headerlink" title="IN操作符"></a>IN操作符</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id <span class="keyword">IN</span> (<span class="string">&#x27;DLL01&#x27;</span>,<span class="string">&#x27;BRS01&#x27;</span>)</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="NOT操作符"><a href="#NOT操作符" class="headerlink" title="NOT操作符"></a>NOT操作符</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> vend_id <span class="operator">=</span> <span class="string">&#x27;DLL01&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h2><p>为在搜索子句中使用通配符，必须使用LIKE操作符。   </p>
+<h3 id="通配符-1"><a href="#通配符-1" class="headerlink" title="%通配符"></a>%通配符</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> prod_name <span class="keyword">LIKE</span> <span class="string">&#x27;%bean bag%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="下划线（-）通配符"><a href="#下划线（-）通配符" class="headerlink" title="下划线（_）通配符"></a>下划线（_）通配符</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">WHERE</span> prod_name <span class="keyword">LIKE</span> <span class="string">&#x27;__ inch teddy bear&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>与%能匹配多个字符不同， _总是刚好匹配一个字符，不能多也不能少。  </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/29/%E3%80%90SQL%E3%80%9102-%E6%8E%92%E5%BA%8F%E6%A3%80%E7%B4%A2%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZZZCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/29/%E3%80%90SQL%E3%80%9102-%E6%8E%92%E5%BA%8F%E6%A3%80%E7%B4%A2%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">【SQL】02-排序检索数据</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-29 14:45:00 / 修改时间：14:54:04" itemprop="dateCreated datePublished" datetime="2024-03-29T14:45:00+08:00">2024-03-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="【SQL】02-排序检索数据"><a href="#【SQL】02-排序检索数据" class="headerlink" title="【SQL】02-排序检索数据"></a>【SQL】02-排序检索数据</h1><h2 id="按单列排序"><a href="#按单列排序" class="headerlink" title="按单列排序"></a>按单列排序</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name <span class="keyword">FROM</span> Products <span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="按多个列排序"><a href="#按多个列排序" class="headerlink" title="按多个列排序"></a>按多个列排序</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name <span class="keyword">FROM</span> Products <span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_price, prod_name;</span><br></pre></td></tr></table></figure>
+
+<p>仅在多个行具有相同的 prod_price 值时才对产品按 prod_name 进行排序  </p>
+<h2 id="按列位置排序"><a href="#按列位置排序" class="headerlink" title="按列位置排序"></a>按列位置排序</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name <span class="keyword">FROM</span> Products <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>按SELECT清单中的第二个列prod_price进行排序，再按prod_name进行排序  </p>
+<h2 id="指定排序方向"><a href="#指定排序方向" class="headerlink" title="指定排序方向"></a>指定排序方向</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name <span class="keyword">FROM</span> Products <span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_price <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<p>DESC：逆序</p>
+<p>ASC：顺序（默认）</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/29/%E3%80%90SQL%E3%80%9101-%E6%A3%80%E7%B4%A2%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZZZCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/29/%E3%80%90SQL%E3%80%9101-%E6%A3%80%E7%B4%A2%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">【SQL】01-检索数据</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-29 14:44:29 / 修改时间：14:53:45" itemprop="dateCreated datePublished" datetime="2024-03-29T14:44:29+08:00">2024-03-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="【SQL】01-检索数据"><a href="#【SQL】01-检索数据" class="headerlink" title="【SQL】01-检索数据"></a>【SQL】01-检索数据</h1><h2 id="检索单个列"><a href="#检索单个列" class="headerlink" title="检索单个列"></a>检索单个列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name <span class="keyword">FROM</span> Products;</span><br></pre></td></tr></table></figure>
+
+<p>返回数据的顺序可能是数据被添加到表中的顺序，也可能不是。只要返回相同数目的行，就是正常的</p>
+<p>虽然 SQL 是不区分大小写的，但是表名、列名和值可能有所不同  </p>
+<h2 id="检索多个列"><a href="#检索多个列" class="headerlink" title="检索多个列"></a>检索多个列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name, prod_price <span class="keyword">FROM</span> Products;</span><br></pre></td></tr></table></figure>
+
+<h2 id="检索所有列"><a href="#检索所有列" class="headerlink" title="检索所有列"></a>检索所有列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> Products;</span><br></pre></td></tr></table></figure>
+
+<p>使用通配符有一个大优点。由于不明确指定列名（因为星号检索每一列），所以能检索出名字未知的列。  </p>
+<h2 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> vend_id <span class="keyword">FROM</span> Products;</span><br></pre></td></tr></table></figure>
+
+<h2 id="限制行数"><a href="#限制行数" class="headerlink" title="限制行数"></a>限制行数</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">5</span> prod_name <span class="keyword">FROM</span> Products;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 只检索前<span class="number">5</span>行数据</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name <span class="keyword">FROM</span> Products LIMIT <span class="number">5</span>;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 返回不超过<span class="number">5</span>行数据</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name <span class="keyword">FROM</span> Products LIMIT <span class="number">4</span> <span class="keyword">OFFSET</span> <span class="number">3</span>;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 从第<span class="number">3</span>行开始，返回不超过<span class="number">4</span>行数据</span><br><span class="line"><span class="keyword">SELECT</span> prod_name <span class="keyword">FROM</span> Products LIMIT <span class="number">3</span>,<span class="number">4</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> </span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9110-%E5%88%86%E6%AE%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZZZCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9110-%E5%88%86%E6%AE%B5/" class="post-title-link" itemprop="url">【操作系统】10-分段</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-29 00:29:11 / 修改时间：00:33:44" itemprop="dateCreated datePublished" datetime="2024-03-29T00:29:11+08:00">2024-03-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="【操作系统】10-分段"><a href="#【操作系统】10-分段" class="headerlink" title="【操作系统】10-分段"></a>【操作系统】10-分段</h1><p>将进程的所有地址空间全部加载到内存中，导致堆与栈之间存在空闲空间浪费</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9109-%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZZZCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9109-%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2/" class="post-title-link" itemprop="url">【操作系统】09-地址转换</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-29 00:29:00 / 修改时间：00:33:20" itemprop="dateCreated datePublished" datetime="2024-03-29T00:29:00+08:00">2024-03-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="【操作系统】09-地址转换"><a href="#【操作系统】09-地址转换" class="headerlink" title="【操作系统】09-地址转换"></a>【操作系统】09-地址转换</h1><p>利用地址转换，硬件对每次内存访问进行处理（即指令获取、数据读取或写入），将指令中的虚拟（virtual）地址转换为数据实际存储的物理（physical）地址。</p>
+<p>操作系统必须在关键的位置介入，设置好硬件，以便完成正确的地址转换。因此它必须管理内存（manage memory），记录被占用和空闲的内存位置，并明智而谨慎地介入。</p>
+<h2 id="动态（基于硬件）重定位"><a href="#动态（基于硬件）重定位" class="headerlink" title="动态（基于硬件）重定位"></a>动态（基于硬件）重定位</h2><p>首次出现的时分机器中引入，那时只是一个简单的思想，称为基址加界限机制（base and bound），有时又称为动态重定位（dynamic relocation）</p>
+<p>每个CPU 需要两个硬件寄存器：基址（base）寄存器和界限（bound）寄存器，有时称为限制（limit）寄存器。这组基址和界限寄存器，让我们能够将地址空间放在物理内存的任何位置，同时又能确保进程只能访问自己的地址空间。</p>
+<p>进程中使用的内存引用都是虚拟地址（virtual address），硬件接下来将虚拟地址加上基址寄存器中的内容，得到物理地址（physical address），再发给内存系统</p>
+<h2 id="硬件支持"><a href="#硬件支持" class="headerlink" title="硬件支持"></a>硬件支持</h2><p>硬件还必须提供基址和界限寄存器，因此每个CPU的内存管理单元（Memory Management Unit，MMU）都需要这两个额外的寄存器</p>
+<p>硬件应该提供一些特殊的指令，用于修改基址寄存器和界限寄存器，允许操作系统在切换进程时改变它们。这些指令是特权指令</p>
+<p>CPU必须能够产生异常，在这种情况下，CPU应该阻止用户程序的执行，并安排操作系统的“越界”异常处理程序去处理</p>
+<h2 id="操作系统支持"><a href="#操作系统支持" class="headerlink" title="操作系统支持"></a>操作系统支持</h2><p>在进程创建时，操作系统必须采取行动，为进程的地址空间找到内存空间</p>
+<p>在进程终止时（正常退出，或因行为不端被强制终止），操作系统也必须做一些工作，回收它的所有内存，给其他进程或者操作系统使用</p>
+<p>在上下文切换时，操作系统也必须执行一些额外的操作，因为为每个程序被加载到内存中不同的物理地址</p>
+<p>操作系统必须提供异常处理程序</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>内存区域中大量的空间被浪费，这种浪费通常称为内部碎片</p>
+<p>即使有足够的物理内存容纳更多进程，但我们目前要求将地址空间放在固定大小的槽块中，因此会出现内部碎片</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9108-%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZZZCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/29/%E3%80%90%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E3%80%9108-%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4/" class="post-title-link" itemprop="url">【操作系统】08-地址空间</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-29 00:28:53 / 修改时间：00:33:06" itemprop="dateCreated datePublished" datetime="2024-03-29T00:28:53+08:00">2024-03-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="【操作系统】08-地址空间"><a href="#【操作系统】08-地址空间" class="headerlink" title="【操作系统】08-地址空间"></a>【操作系统】08-地址空间</h1><h2 id="时分共享"><a href="#时分共享" class="headerlink" title="时分共享"></a>时分共享</h2><p>让一个进程单独占用全部内存运行一小段时间，然后停止它，并将它所有的状态信息保存在磁盘上（包含所有的物理内存），加载其他进程的状态信息，再运行一段时间。但将全部的内存信息保存到磁盘就太慢了。因此，在进程切换的时候，我们仍然将进程信息放在内存中，这样操作系统可以更有效率地实现时分共享</p>
+<p>多个程序同时驻留在内存中，使保护成为重要问题。人们不希望一个进程可以读取其他进程的内存</p>
+<h2 id="地址空间"><a href="#地址空间" class="headerlink" title="地址空间"></a>地址空间</h2><p>一个进程的地址空间包含运行的程序的所有内存状态：</p>
+<ol>
+<li>代码段code</li>
+<li>栈stack：栈从底部开始向上增长</li>
+<li>堆heap：堆在代码之下开始并向下增长</li>
+</ol>
+<p>当我们描述地址空间时，所描述的是操作系统提供给运行程序的抽象（abstract）。程序不在物理地址0～16KB的内存中，而是加载在任意的物理地址。</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ol>
+<li>透明：程序不应该感知到内存被虚拟化的事实，相反，程序的行为就好像它拥有自己的私有物理内</li>
+<li>效率：操作系统应该追求虚拟化尽可能高效</li>
+<li>保护：操作系统应确保进程受到保护（protect），不会受其他进程影响，操作系统本身也不会受进程影响</li>
+</ol>
+<h2 id="内存操作API"><a href="#内存操作API" class="headerlink" title="内存操作API"></a>内存操作API</h2><h3 id="内存类型"><a href="#内存类型" class="headerlink" title="内存类型"></a>内存类型</h3><ol>
+<li>栈内存：申请与释放由编译器隐式完成</li>
+<li>堆内存：申请与释放由程序员显式完成</li>
+</ol>
+<h3 id="malloc"><a href="#malloc" class="headerlink" title="malloc()"></a>malloc()</h3><p>传入要申请的堆空间的大小，它成功就返回一个指向新申请空间的指针</p>
+<p>只需要包含头文件stdlib.h就可以使用malloc了。但实际上，甚至都不需这样做，因为C库是C程序默但链接的</p>
+<h3 id="free"><a href="#free" class="headerlink" title="free()"></a>free()</h3><p>释放不再使用的堆内存</p>
+<h3 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h3><ol>
+<li>忘记分配内存（野指针）</li>
+<li>没有分配足够的内存（memcpy）</li>
+<li>忘记初始化分配的内存</li>
+<li>忘记释放内存（内存泄露）</li>
+<li>在使用完毕前释放内存（悬空指针）</li>
+<li>反复释放内存</li>
+</ol>
+<h3 id="操作系统支持"><a href="#操作系统支持" class="headerlink" title="操作系统支持"></a>操作系统支持</h3><p>它们不是系统调用，而是库调用</p>
 
       
     </div>
@@ -225,7 +1137,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

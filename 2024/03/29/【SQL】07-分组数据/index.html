@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="【SQL】07-分组数据创建分组123SELECT vend_id, COUNT(*) AS num_prodsFROM ProductsGROUP BY vend_id;  GROUP BY子句必须出现在WHERE子句之后，ORDER BY子句之前 过滤分组WHERE过滤指定的是行而不是分组；HAVING可以过滤分组，所有类型的WHERE子句都可以用HAVING来替代 1234SELECT cu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【SQL】07-分组数据">
+<meta property="og:url" content="http://example.com/2024/03/29/%E3%80%90SQL%E3%80%9107-%E5%88%86%E7%BB%84%E6%95%B0%E6%8D%AE/index.html">
+<meta property="og:site_name" content="ZZZCY的编程小站">
+<meta property="og:description" content="【SQL】07-分组数据创建分组123SELECT vend_id, COUNT(*) AS num_prodsFROM ProductsGROUP BY vend_id;  GROUP BY子句必须出现在WHERE子句之后，ORDER BY子句之前 过滤分组WHERE过滤指定的是行而不是分组；HAVING可以过滤分组，所有类型的WHERE子句都可以用HAVING来替代 1234SELECT cu">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-29T06:45:41.000Z">
+<meta property="article:modified_time" content="2024-03-29T06:54:22.523Z">
+<meta property="article:author" content="ZZZCY">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/03/29/%E3%80%90SQL%E3%80%9107-%E5%88%86%E7%BB%84%E6%95%B0%E6%8D%AE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/03/29/%E3%80%90SQL%E3%80%9107-%E5%88%86%E7%BB%84%E6%95%B0%E6%8D%AE/","path":"2024/03/29/【SQL】07-分组数据/","title":"【SQL】07-分组数据"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【SQL】07-分组数据 | ZZZCY的编程小站</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZZZCY的编程小站</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%90SQL%E3%80%9107-%E5%88%86%E7%BB%84%E6%95%B0%E6%8D%AE"><span class="nav-number">1.</span> <span class="nav-text">【SQL】07-分组数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%88%86%E7%BB%84"><span class="nav-number">1.1.</span> <span class="nav-text">创建分组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%88%86%E7%BB%84"><span class="nav-number">1.2.</span> <span class="nav-text">过滤分组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SELECT%E5%AD%90%E5%8F%A5%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.3.</span> <span class="nav-text">SELECT子句顺序</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZZZCY</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/29/%E3%80%90SQL%E3%80%9107-%E5%88%86%E7%BB%84%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZZZCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【SQL】07-分组数据 | ZZZCY的编程小站">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【SQL】07-分组数据
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-29 14:45:41 / 修改时间：14:54:22" itemprop="dateCreated datePublished" datetime="2024-03-29T14:45:41+08:00">2024-03-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="【SQL】07-分组数据"><a href="#【SQL】07-分组数据" class="headerlink" title="【SQL】07-分组数据"></a>【SQL】07-分组数据</h1><h2 id="创建分组"><a href="#创建分组" class="headerlink" title="创建分组"></a>创建分组</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_id, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> num_prods</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> vend_id;</span><br></pre></td></tr></table></figure>
+
+<p>GROUP BY子句必须出现在WHERE子句之后，ORDER BY子句之前</p>
+<h2 id="过滤分组"><a href="#过滤分组" class="headerlink" title="过滤分组"></a>过滤分组</h2><p><code>WHERE</code>过滤指定的是行而不是分组；<code>HAVING</code>可以过滤分组，所有类型的<code>WHERE</code>子句都可以用<code>HAVING</code>来替代</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cust_id, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> orders</span><br><span class="line"><span class="keyword">FROM</span> Orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> cust_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;=</span> <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>WHERE</code>在数据分组前进行过滤，<code>HAVING</code>在数据分组后进行过滤，<code>WHERE</code>排除的行不在分组内，可能改变计算值</p>
+<h2 id="SELECT子句顺序"><a href="#SELECT子句顺序" class="headerlink" title="SELECT子句顺序"></a>SELECT子句顺序</h2><table>
+<thead>
+<tr>
+<th>子句</th>
+<th>说明</th>
+<th>必须使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SELECT</td>
+<td>返回数据</td>
+<td>是</td>
+</tr>
+<tr>
+<td>FROM</td>
+<td>从中检索数据的表</td>
+<td>仅在从表选择数据时使用</td>
+</tr>
+<tr>
+<td>WHERE</td>
+<td>行级过滤</td>
+<td>否</td>
+</tr>
+<tr>
+<td>GROUP BY</td>
+<td>分组说明</td>
+<td>仅在按组计算聚集时使用</td>
+</tr>
+<tr>
+<td>HAVING</td>
+<td>组级过滤</td>
+<td>否</td>
+</tr>
+<tr>
+<td>ORDER BY</td>
+<td>输出排序顺序</td>
+<td>否</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SQL/" rel="tag"># SQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/29/%E3%80%90SQL%E3%80%9106-%E6%B1%87%E6%80%BB%E6%95%B0%E6%8D%AE/" rel="prev" title="【SQL】06-汇总数据">
+                  <i class="fa fa-angle-left"></i> 【SQL】06-汇总数据
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/03/29/%E3%80%90SQL%E3%80%9108-%E5%AD%90%E6%9F%A5%E8%AF%A2/" rel="next" title="【SQL】08-子查询">
+                  【SQL】08-子查询 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZZZCY</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
